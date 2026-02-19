@@ -906,6 +906,12 @@ async function restaurarSessao() {
   console.log('🔍 Verificando sessão existente...');
 
   const estado = carregarEstadoSessao();
+  
+  if (estado && (estado.status === 'CONCLUIDO' || estado.status === 'ENCAMINHADO')) {
+    console.log('ℹ️ Atendimento anterior já foi finalizado. Iniciando nova sessão.');
+    limparSessao();
+    return;
+  }
   if (!estado || !estado.atendimentoId) {
     console.log('ℹ️ Nenhuma sessão ativa encontrada');
     return;
