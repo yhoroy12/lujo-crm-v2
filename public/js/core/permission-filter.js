@@ -30,7 +30,7 @@ const PermissionFilter = {
       // 2. Validar autenticação
       if (!window.AuthSystem?.isAuthenticated()) {
         console.warn('⚠️ Usuário não autenticado. Redirecionando...');
-        window.location.href = 'templates/login.html';
+        window.location.href = './index.html';
         return;
       }
 
@@ -352,7 +352,7 @@ const PermissionFilter = {
         } else {
           // Sessão deletada, fazer logout
           console.log('🚪 Sessão finalizada. Redirecionando...');
-          window.location.href = 'login.html';
+          window.location.href = './index.html';
         }
       }
     }, 2000);
