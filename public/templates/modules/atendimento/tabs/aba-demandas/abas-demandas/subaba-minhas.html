@@ -1,0 +1,71 @@
+<div class="demandas-conteudo demandas-minhas">
+          <div class="demandas-grid-principal">
+
+            <aside class="demandas-lista-painel card">
+              <div class="painel-header">
+                <h3><i class="fi fi-rr-play-alt"></i> Em Andamento</h3>
+                <span class="resultado-contador" id="contadorMinhas">0</span>
+              </div>
+              <div class="painel-body">
+                <div id="estadoCarregandoMinhas" class="estado-container">
+                  <div class="spinner"></div>
+                  <p>Carregando fila...</p>
+                </div>
+                <div id="listaDemandasMinhas" class="demandas-lista">
+                </div>
+              </div>
+            </aside>
+
+            <main class="demandas-detalhes-painel-minhas card" id="painelDetalhesTrabalho">
+              <div id="detalhesVazioMinhas" class="estado-vazio">
+                <i class="fi fi-rr-mouse-pointer"></i>
+                <h4>Selecione uma demanda</h4>
+                <p>Clique na lista lateral para carregar os dados.</p>
+              </div>
+
+              <div id="detalhesConteudoMinhas" class="detalhes-conteudo-trabalho hidden">
+                <div class="trabalho-header-top">
+                  <div class="info-meta">
+                    <span id="detalhesHorarioMinhas">--:--</span>
+                    <span class="badge status-andamento" id="detalhesStatusMinhas">EM PROCESSO</span>
+                  </div>
+                  <div class="info-id">
+                    <strong>ID:</strong> <span id="detalhesIdMinhas">#---</span>
+                  </div>
+                </div>
+
+                <div class="trabalho-origem-banner">
+                  <p><strong>Origem:</strong> <span id="detalhesOrigemMinhas">-</span></p>
+                  <p><strong>Nome:</strong> <span id="detalhesNomeClienteMinhas">-</span></p>
+                </div>
+
+                <div class="detalhes-grid-interna">
+                  <div class="secao-trabalho box-cliente">
+                    <h5><i class="fi fi-rr-user"></i> Dados do Cliente</h5>
+                    <div id="detalhesDadosClienteMinhas" class="info-render">
+                    </div>
+                  </div>
+
+                  <div class="secao-trabalho box-demanda">
+                    <h5><i class="fi fi-rr-document"></i> Detalhes da Demanda</h5>
+                    <div id="detalhesDescricaoMinhas" class="info-render">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="secao-resolucao">
+                  <h5><i class="fi fi-rr-comment-code"></i> Parecer Técnico / Resolução</h5>
+                  <textarea id="inputResolucao" placeholder="Digite aqui a solução ou observações..."></textarea>
+
+                  <div class="trabalho-acoes">
+                    <button class="btn-concluir" id="btnConcluirTrabalho"><i class="fi fi-rr-check"></i>
+                      Concluir</button>
+                    <button class="btn-devolver" id="btnDevolverDemanda"><i class="fi fi-rr-undo"></i> Devolver</button>
+                    <button class="btn-aprovar" id="btnPedirAprovação"><i class="fi fi-rr-paper-plane"></i> Pedir
+                      Aprovação</button>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>

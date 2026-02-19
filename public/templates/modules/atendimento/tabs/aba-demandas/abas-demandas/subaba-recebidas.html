@@ -1,0 +1,212 @@
+<div class="demandas-conteudo demandas-recebidas">
+          <div class="demandas-grid-3col">
+
+            <!-- COLUNA 1: FILTROS -->
+            <aside class="demandas-filtros-painel card">
+              <div class="painel-header">
+                <h3>
+                  <i class="fi fi-rr-filter"></i>
+                  Filtros
+                </h3>
+              </div>
+
+              <div class="painel-body">
+                <form id="formFiltrosRecebidas">
+                  <div class="campo">
+                    <label for="filtroStatusRecebidas">
+                      <i class="fi fi-rr-checkbox"></i>
+                      Status
+                    </label>
+                    <select id="filtroStatusRecebidas" class="form-select">
+                      <option value="">Todos os status</option>
+                      <option value="PENDENTE">Pendente</option>
+                      <option value="EM_ANDAMENTO">Em Andamento</option>
+                      <option value="AGUARDANDO_GERENCIA">Aguardando Gerência</option>
+                      <option value="RECUSADO">Recusado</option>
+                      <option value="CONCLUIDO">Concluído</option>
+                    </select>
+                  </div>
+
+                  <div class="campo">
+                    <label for="filtroOrigemRecebidas">
+                      <i class="fi fi-rr-arrow-small-left"></i>
+                      Origem
+                    </label>
+                    <select id="filtroOrigemRecebidas" class="form-select">
+                      <option value="">Todas as origens</option>
+                      <option value="atendimento">Atendimento</option>
+                      <option value="conteudo">Conteúdo</option>
+                      <option value="marketing">Marketing</option>
+                      <option value="financeiro">Financeiro</option>
+                      <option value="copyright">Copyright</option>
+                      <option value="tecnico">Técnico</option>
+                    </select>
+                  </div>
+
+                  <div class="campo">
+                    <label for="filtroPrioridadeRecebidas">
+                      <i class="fi fi-rr-exclamation"></i>
+                      Prioridade
+                    </label>
+                    <select id="filtroPrioridadeRecebidas" class="form-select">
+                      <option value="">Todas</option>
+                      <option value="URGENTE">Crítica</option>
+                      <option value="ALTA">Alta</option>
+                      <option value="MEDIA">Média</option>
+                      <option value="BAIXA">Baixa</option>
+                    </select>
+                  </div>
+
+                  <div class="campo">
+                    <label for="filtroPeriodoRecebidas">
+                      <i class="fi fi-rr-calendar"></i>
+                      Período
+                    </label>
+                    <select id="filtroPeriodoRecebidas" class="form-select">
+                      <option value="hoje">Hoje</option>
+                      <option value="semana">Última Semana</option>
+                      <option value="mes">Último Mês</option>
+                      <option value="todos">Todos</option>
+                    </select>
+                  </div>
+
+                  <div class="filtros-acoes">
+                    <button type="button" class="btn btn-primary btn-block" id="btnAplicarFiltrosRecebidas">
+                      <i class="fi fi-rr-filter"></i>
+                      Aplicar Filtros
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-block" id="btnLimparFiltrosRecebidas">
+                      <i class="fi fi-rr-refresh"></i>
+                      Limpar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </aside>
+
+            <!-- COLUNA 2: LISTA -->
+            <main class="demandas-resultados-painel card">
+              <div class="painel-header">
+                <h3>
+                  <i class="fi fi-rr-inbox-in"></i>
+                  Demandas Recebidas
+                </h3>
+                <span class="resultado-contador" id="contadorRecebidas">0 demandas</span>
+              </div>
+
+              <div class="painel-body">
+
+                <!-- ✅ ESTADO 1: CARREGANDO (ativa por padrão - autoload) -->
+                <div class="estado-container estado-carregando ativa" id="estadoCarregandoRecebidas">
+                  <div class="spinner"></div>
+                  <p>Carregando demandas...</p>
+                </div>
+
+                <!-- ✅ ESTADO 2: NÃO ENCONTRADO -->
+                <div class="estado-container estado-nao-encontrado" id="estadoNaoEncontradoRecebidas">
+                  <i class="fi fi-rr-inbox"></i>
+                  <h4>Nenhuma demanda recebida</h4>
+                  <p>Você não possui demandas pendentes no momento</p>
+                </div>
+
+                <!-- ✅ LISTA DE DEMANDAS (oculta por padrão) -->
+                <div class="demandas-lista hidden" id="listaDemandasRecebidas">
+                  <!-- Cards gerados via JavaScript -->
+                </div>
+
+              </div>
+            </main>
+
+            <!-- COLUNA 3: DETALHES -->
+            <aside class="demandas-detalhes-painel card">
+
+              <div class="estado-vazio" id="detalhesVazioRecebidas">
+                <i class="fi fi-rr-document"></i>
+                <h4>Selecione uma demanda</h4>
+                <p>Clique em uma demanda da lista para ver os detalhes e ações disponíveis</p>
+              </div>
+
+              <div class="detalhes-conteudo hidden" id="detalhesConteudoRecebidas">
+                <div class="detalhes-header">
+                  <div class="detalhes-titulo-grupo">
+                    <h3 id="detalhesTituloRecebidas">Título da Demanda</h3>
+                    <div class="detalhes-badges">
+                      <span class="badge" id="detalhesStatusRecebidas">Status</span>
+                      <span class="badge badge-origem" id="detalhesOrigemRecebidas">Origem</span>
+                    </div>
+                  </div>
+                  <button class="btn-close-detalhes" id="btnFecharDetalhesRecebidas">
+                    <i class="fi fi-rr-cross"></i>
+                  </button>
+                </div>
+
+                <div class="detalhes-body">
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-info"></i>
+                      Informações
+                    </h4>
+                    <div class="detalhes-info-grid">
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Ticket</span>
+                        <span class="info-value" id="detalhesTicketRecebidas">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Cliente</span>
+                        <span class="info-value" id="detalhesClienteRecebidas">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Recebido em</span>
+                        <span class="info-value" id="detalhesDataRecebidoRecebidas">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Prioridade</span>
+                        <span class="info-value" id="detalhesPrioridadeRecebidas">-</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-document"></i>
+                      Solicitação
+                    </h4>
+                    <div class="detalhes-descricao" id="detalhesDescricaoRecebidas">
+                      <p>-</p>
+                    </div>
+                  </div>
+
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-user"></i>
+                      Dados do Cliente
+                    </h4>
+                    <div class="detalhes-dados" id="detalhesDadosClienteRecebidas">
+                      <pre>-</pre>
+                    </div>
+                  </div>
+
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-time-past"></i>
+                      Histórico
+                    </h4>
+                    <div class="detalhes-timeline" id="detalhesTimelineRecebidas">
+                      <!-- Timeline via JavaScript -->
+                    </div>
+                  </div>
+
+                  <div class="detalhes-acoes">
+                    <button class="btn btn-secondary btn-block" id="btnAdicionarObservacao">
+                      <i class="fi fi-rr-comment"></i>
+                      Adicionar Observação
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </aside>
+
+          </div>
+        </div>

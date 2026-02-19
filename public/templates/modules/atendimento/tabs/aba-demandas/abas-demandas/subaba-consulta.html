@@ -1,0 +1,212 @@
+<div class="demandas-conteudo demandas-consulta ativa">
+          <div class="demandas-grid-3col">
+
+            <!-- COLUNA 1: FILTROS DE BUSCA -->
+            <aside class="demandas-filtros-painel card">
+              <div class="painel-header">
+                <h3>
+                  <i class="fi fi-rr-search"></i>
+                  Buscar Demanda
+                </h3>
+              </div>
+
+              <div class="painel-body">
+                <form id="formBuscaDemanda">
+
+                  <div class="campo">
+                    <label for="buscaTicket">
+                      <i class="fi fi-rr-ticket"></i>
+                      Número do Ticket
+                    </label>
+                    <input type="text" id="buscaTicket" class="form-input" placeholder="Ex: TK-2025-001">
+                  </div>
+
+                  <div class="campo">
+                    <label for="buscaCliente">
+                      <i class="fi fi-rr-user"></i>
+                      E-mail do Cliente
+                    </label>
+                    <input type="text" id="buscaCliente" class="form-input" placeholder="Digite o e-mail...">
+                  </div>
+
+                  <div class="campo">
+                    <label for="buscaSetor">
+                      <i class="fi fi-rr-building"></i>
+                      Setor Responsável
+                    </label>
+                    <select id="buscaSetor" class="form-select">
+                      <option value="">Todos os setores</option>
+                      <option value="atendimento">Atendimento</option>
+                      <option value="conteudo">Conteúdo</option>
+                      <option value="marketing">Marketing</option>
+                      <option value="financeiro">Financeiro</option>
+                      <option value="copyright">Copyright</option>
+                      <option value="tecnico">Técnico</option>
+                    </select>
+                  </div>
+
+                  <div class="campo">
+                    <label for="buscaStatus">
+                      <i class="fi fi-rr-checkbox"></i>
+                      Status
+                    </label>
+                    <select id="buscaStatus" class="form-select">
+                      <option value="">Todos os status</option>
+                      <option value="PENDENTE">Pendente</option>
+                      <option value="EM_PROCESSO">Em Processo</option>
+                      <option value="AGUARDANDO_GERENCIA">Aguardando Gerência</option>
+                      <option value="RECUSADO">Recusado</option>
+                      <option value="CONCLUIDO">Concluído</option>
+                    </select>
+                  </div>
+
+                  <div class="campo">
+                    <label for="buscaPeriodo">
+                      <i class="fi fi-rr-calendar"></i>
+                      Período
+                    </label>
+                    <select id="buscaPeriodo" class="form-select">
+                      <option value="hoje">Hoje</option>
+                      <option value="semana">Última Semana</option>
+                      <option value="mes">Último Mês</option>
+                      <option value="todos">Todos</option>
+                    </select>
+                  </div>
+
+                  <div class="filtros-acoes">
+                    <button type="button" class="btn btn-primary btn-block" id="btnExecutarBusca">
+                      <i class="fi fi-rr-search"></i>
+                      Buscar
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-block" id="btnLimparBusca">
+                      <i class="fi fi-rr-refresh"></i>
+                      Limpar
+                    </button>
+                  </div>
+
+                </form>
+              </div>
+            </aside>
+
+            <!-- COLUNA 2: RESULTADOS -->
+            <main class="demandas-resultados-painel card">
+              <div class="painel-header">
+                <h3>
+                  <i class="fi fi-rr-list"></i>
+                  Resultados
+                </h3>
+                <span class="resultado-contador" id="contadorResultados">0 encontrados</span>
+              </div>
+
+              <div class="painel-body">
+
+                <!-- ✅ ESTADO 1: VAZIO INICIAL (ativa por padrão) -->
+                <div class="estado-container estado-vazio ativa" id="estadoAguardandoConsulta">
+                  <i class="fi fi-rr-search"></i>
+                  <h4>Utilize os filtros para buscar</h4>
+                  <p>Preencha pelo menos um campo e clique em "Buscar"</p>
+                </div>
+
+                <!-- ✅ ESTADO 2: CARREGANDO -->
+                <div class="estado-container estado-carregando" id="estadoCarregandoConsulta">
+                  <div class="spinner"></div>
+                  <p>Buscando demandas...</p>
+                </div>
+
+                <!-- ✅ ESTADO 3: NÃO ENCONTRADO -->
+                <div class="estado-container estado-nao-encontrado" id="estadoNaoEncontradoConsulta">
+                  <i class="fi fi-rr-inbox"></i>
+                  <h4>Nenhuma demanda encontrada</h4>
+                  <p>Tente ajustar os filtros de busca</p>
+                </div>
+
+                <!-- ✅ LISTA DE RESULTADOS (oculta por padrão) -->
+                <div class="demandas-lista hidden" id="listaResultadosConsulta">
+                  <!-- Cards gerados via JavaScript -->
+                </div>
+
+              </div>
+            </main>
+
+            <!-- COLUNA 3: DETALHES -->
+            <aside class="demandas-detalhes-painel card">
+
+              <div class="estado-vazio" id="detalhesVazioConsulta">
+                <i class="fi fi-rr-document"></i>
+                <h4>Selecione uma demanda</h4>
+                <p>Clique em uma demanda da lista para ver os detalhes completos</p>
+              </div>
+
+              <div class="detalhes-conteudo hidden" id="detalhesConteudoConsulta">
+                <div class="detalhes-header">
+                  <div class="detalhes-titulo-grupo">
+                    <h3 id="detalhesTituloConsulta">Título da Demanda</h3>
+                    <div class="detalhes-badges">
+                      <span class="badge" id="detalhesStatusConsulta">Status</span>
+                      <span class="badge badge-setor" id="detalhesSetorConsulta">Setor</span>
+                    </div>
+                  </div>
+                  <button class="btn-close-detalhes" id="btnFecharDetalhesConsulta">
+                    <i class="fi fi-rr-cross"></i>
+                  </button>
+                </div>
+
+                <div class="detalhes-body">
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-info"></i>
+                      Informações Gerais
+                    </h4>
+                    <div class="detalhes-info-grid">
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Ticket</span>
+                        <span class="info-value" id="detalhesTicketConsulta">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Cliente</span>
+                        <span class="info-value" id="detalhesClienteConsulta">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Data de Criação</span>
+                        <span class="info-value" id="detalhesDataCriacaoConsulta">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Última Atualização</span>
+                        <span class="info-value" id="detalhesDataAtualizacaoConsulta">-</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-document"></i>
+                      Descrição
+                    </h4>
+                    <div class="detalhes-descricao" id="detalhesDescricaoConsulta">
+                      <p>Descrição completa da demanda será exibida aqui...</p>
+                    </div>
+                  </div>
+
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-time-past"></i>
+                      Histórico de Atualizações
+                    </h4>
+                    <div class="detalhes-timeline" id="detalhesTimelineConsulta">
+                      <!-- Timeline via JavaScript -->
+                    </div>
+                  </div>
+
+                  <div class="detalhes-acoes">
+                    <button class="btn btn-secondary btn-block" id="btnSolicitarAtualizacaoConsulta">
+                      <i class="fi fi-rr-refresh"></i>
+                      Solicitar Atualização
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </aside>
+
+          </div>
+        </div>

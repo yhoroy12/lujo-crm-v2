@@ -1,0 +1,302 @@
+<section class="modulo-painel-conteudo">
+  <div class="painel-conteudo">
+
+    <div class="abas-container">
+      <button class="aba-btn ativa" data-aba="aba-fila">
+        <i class="fi fi-rr-list"></i> Fila de Conteúdos
+      </button>
+      <button class="aba-btn" data-aba="aba-aprovados">
+        <i class="fi fi-rr-check-circle"></i> Aprovados
+      </button>
+      <button class="aba-btn" data-aba="aba-recusados">
+        <i class="fi fi-rr-cross-circle"></i> Recusados
+      </button>
+    </div>
+
+    <div class="aba-conteudo aba-fila ativa">
+      <div class="filtros-container">
+        <select id="filtroStatus">
+          <option value="">Todos os Status</option>
+          <option value="aguardando">Aguardando Avaliação</option>
+          <option value="aprovado_1">Aprovado - Etapa 1</option>
+          <option value="distribuido">Distribuído</option>
+          <option value="recusado">Recusado</option>
+        </select>
+        
+        <select id="filtroEtapa">
+          <option value="">Todas as Etapas</option>
+          <option value="1">Avaliação 1</option>
+          <option value="2">Avaliação 2</option>
+        </select>
+        
+        <input type="text" id="searchConteudo" placeholder="🔍 Buscar artista ou título...">
+        
+        <button class="btn btn-secondary" id="btnLimparFiltros">Limpar</button>
+      </div>
+
+      <div class="card">
+        <div class="stats-bar">
+          <div class="stat-mini">
+            <span class="stat-label">Total na Fila</span>
+            <span class="stat-value" id="totalFila">0</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-label">Aguardando Avaliação</span>
+            <span class="stat-value" id="totalAguardando">0</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-label">Em Análise</span>
+            <span class="stat-value" id="totalAnalise">0</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-label">Distribuídos Hoje</span>
+            <span class="stat-value" id="totalDistribuidos">0</span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Artista</th>
+                <th>Título</th>
+                <th>Etapa</th>
+                <th>Status</th>
+                <th>Responsável</th>
+                <th>Data</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaConteudos">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="aba-conteudo aba-aprovados">
+      <div class="card">
+        <h3>Conteúdos Aprovados e Distribuídos</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Artista</th>
+                <th>Título</th>
+                <th>UPC</th>
+                <th>Data Distribuição</th>
+                <th>Operador</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaAprovados">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="aba-conteudo aba-recusados">
+      <div class="card">
+        <h3>Conteúdos Recusados</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Artista</th>
+                <th>Título</th>
+                <th>Motivo</th>
+                <th>Data Recusa</th>
+                <th>Operador</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaRecusados">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-overlay" id="modalAvaliacao">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h3 id="modalTitulo">Avaliação de Conteúdo</h3>
+        <button class="close-btn" id="btnCloseAvaliacao">&times;</button>
+      </div>
+
+      <div class="avaliacao-container">
+        
+        <div class="bloco-avaliacao">
+          <h4><i class="fi fi-rr-music-alt"></i> Dados do Conteúdo</h4>
+          <div class="form-grid">
+            <div class="campo">
+              <label>ID</label>
+              <input type="text" id="conteudoId" readonly>
+            </div>
+            <div class="campo">
+              <label>Data Upload</label>
+              <input type="text" id="conteudoData" readonly>
+            </div>
+            <div class="campo">
+              <label>Artista *</label>
+              <input type="text" id="conteudoArtista">
+            </div>
+            <div class="campo">
+              <label>Featuring</label>
+              <input type="text" id="conteudoFeat" placeholder="Deixe vazio se não houver">
+            </div>
+            <div class="campo" style="grid-column: 1 / -1;">
+              <label>Título *</label>
+              <input type="text" id="conteudoTitulo">
+            </div>
+            <div class="campo">
+              <label>Label</label>
+              <input type="text" id="conteudoLabel">
+            </div>
+            <div class="campo">
+              <label>Email de Upload</label>
+              <input type="email" id="conteudoEmail">
+            </div>
+          </div>
+        </div>
+
+        <div class="bloco-avaliacao" id="blocoAvaliacao1">
+          <h4><i class="fi fi-rr-clipboard-list-check"></i> Avaliação 1 - Análise de Conteúdo</h4>
+          
+          <div id="avaliacao1Pendente">
+            <div class="campo">
+              <label>Observações</label>
+              <textarea id="obs1" rows="4" placeholder="Comentários sobre o conteúdo..."></textarea>
+            </div>
+            
+            <div class="acoes-avaliacao">
+              <button class="btn btn-success" id="btnAprovar1">
+                <i class="fi fi-rr-check"></i> AP - Aprovar
+              </button>
+              <button class="btn btn-danger" id="btnRecusar1">
+                <i class="fi fi-rr-cross"></i> RE - Recusar
+              </button>
+              <button class="btn btn-warning" id="btnRascunho">
+                <i class="fi fi-rr-refresh"></i> RA - Retornar Rascunho
+              </button>
+            </div>
+          </div>
+
+          <div id="avaliacao1Concluida" class="hidden">
+            <div class="resultado-avaliacao">
+              <div class="resultado-item">
+                <strong>Decisão:</strong>
+                <span id="decisao1"></span>
+              </div>
+              <div class="resultado-item">
+                <strong>Operador:</strong>
+                <span id="operador1"></span>
+              </div>
+              <div class="resultado-item">
+                <strong>Data:</strong>
+                <span id="dataAvaliacao1"></span>
+              </div>
+              <div class="resultado-item" style="grid-column: 1 / -1;">
+                <strong>Observações:</strong>
+                <p id="obsTexto1"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bloco-avaliacao hidden" id="blocoAvaliacao2">
+          <h4><i class="fi fi-rr-rocket-launch"></i> Avaliação 2 - Conferência & Distribuição</h4>
+          
+          <div id="avaliacao2Pendente">
+            <div class="campo">
+              <label>UPC (obrigatório para distribuição)</label>
+              <input type="text" id="upcCode" placeholder="000000000000">
+            </div>
+            
+            <div class="campo">
+              <label>Observações</label>
+              <textarea id="obs2" rows="3" placeholder="Comentários finais..."></textarea>
+            </div>
+            
+            <div class="acoes-avaliacao">
+              <button class="btn btn-success" id="btnDistribuir">
+                <i class="fi fi-rr-paper-plane"></i> DI - Distribuir
+              </button>
+              <button class="btn btn-danger" id="btnRecusar2">
+                <i class="fi fi-rr-cross"></i> RE - Recusar
+              </button>
+            </div>
+          </div>
+
+          <div id="avaliacao2Concluida" class="hidden">
+            <div class="resultado-avaliacao">
+              <div class="resultado-item">
+                <strong>Decisão:</strong>
+                <span id="decisao2"></span>
+              </div>
+              <div class="resultado-item">
+                <strong>UPC:</strong>
+                <span id="upcFinal"></span>
+              </div>
+              <div class="resultado-item">
+                <strong>Operador:</strong>
+                <span id="operador2"></span>
+              </div>
+              <div class="resultado-item">
+                <strong>Data:</strong>
+                <span id="dataAvaliacao2"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bloco-avaliacao">
+          <h4><i class="fi fi-rr-share"></i> Encaminhamentos</h4>
+          <div class="encaminhamentos-grid">
+            <button class="btn btn-secondary" id="btnEncaminharMarketing">
+              <i class="fi fi-rr-megaphone"></i> Enviar para Marketing
+            </button>
+            <button class="btn btn-secondary" id="btnEncaminharAtendimento">
+              <i class="fi fi-rr-headset"></i> Enviar para Atendimento
+            </button>
+          </div>
+        </div>
+
+        <div class="bloco-avaliacao">
+          <h4><i class="fi fi-rr-time-past"></i> Histórico / Linha do Tempo</h4>
+          <div class="timeline-container" id="timelineConteudo">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="btnFecharAvaliacao">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalEncaminhamento">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="encaminhamentoTitulo">Encaminhar para Área</h3>
+        <button class="close-btn" id="btnCloseEncaminhamento">&times;</button>
+      </div>
+      <form id="formEncaminhamento">
+        <div class="campo">
+          <label>Mensagem</label>
+          <textarea id="mensagemEncaminhamento" rows="5" placeholder="Digite a mensagem para a área..." required></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btnCancelarEncaminhamento">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>

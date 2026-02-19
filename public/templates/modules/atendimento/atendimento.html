@@ -1,0 +1,39 @@
+<section class="modulo-painel-atendimento modulo-atendimento">
+  <div class="painel-atendimento">
+    <!-- Abas de navegação -->
+    <div class="abas-container">
+      <button class="aba-btn ativa" data-aba="atendimento">
+        <i class="fi fi-rr-headset"></i> <span>Atendimento</span>
+      </button>
+      <button class="aba-btn" data-aba="emails">
+        <i class="fi fi-rr-envelope"></i> <span>E-mails</span>
+      </button>
+      <button class="aba-btn" data-aba="demandas">
+        <i class="fi fi-rr-inbox"></i> <span>Demandas</span>
+      </button>
+      <button class="aba-btn" data-aba="historico">
+        <i class="fi fi-rr-time-past"></i> <span>Histórico</span>
+      </button>
+
+      <div class="ticket-status-indicator" id="ticketStatusIndicator">
+        <span class="status-badge" id="statusBadge">--</span>
+      </div>
+    </div>
+    <!-- Conteúdo das abas -->
+    <div class="abas-conteudo">
+      <div class="aba-conteudo-container atendimento ativa" id="container-atendimento" ></div>
+      <div class="aba-conteudo-container emails" id="container-emails"></div>
+      <div class="aba-conteudo-container demandas" id="container-demandas"></div>
+      <div class="aba-conteudo-container historico" id="container-historico"></div>
+    </div>
+
+  </div>
+  <!-- Container para popups -->
+    <div id="atendimento-popups-container">
+      <!-- inserido dinamicamente via JS-->
+    </div>
+  <!-- Container para modais -->
+    <div id="atendimento-modais-container">
+      <!-- inserido dinamicamente via JS-->
+    </div>
+</section>

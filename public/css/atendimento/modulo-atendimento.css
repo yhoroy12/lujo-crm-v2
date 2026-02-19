@@ -1,0 +1,214 @@
+/* ==================================================================================
+   MODULO-ATENDIMENTO.CSS - Módulo modulo-atendimento
+   Autor: Sistema Lujo Network
+   Última atualização: 2025
+   
+   Este arquivo faz parte da estrutura modular CSS do módulo de atendimento.
+   Veja ESTRUTURA_MODULAR.md para documentação completa.
+==================================================================================
+[1] GLOBAL - VARIÁVEIS E ESTILOS COMPARTILHADOS
+============================================================ */
+
+/* Variáveis específicas do módulo de atendimento */
+:root {
+  /* Cores adicionais para e-mail */
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #8b8f98;
+  --text: #222533;
+  --primary: #0b66ff;
+  --border: #e6e9ef;
+  --success: #0ea5a4;
+  --shadow-sm: 0 2px 6px rgba(16, 24, 40, 0.04);
+}
+
+/* Reset específico do módulo */
+.modulo-painel-atendimento * {
+  box-sizing: border-box;
+}
+
+/* Container principal do módulo */
+.modulo-painel-atendimento .painel-atendimento {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 69px);
+  background: var(--color-secondary);
+}
+
+/* ============================================================
+[3] ABAS E NAVEGAÇÃO - SISTEMA DE TABS
+============================================================ */
+
+/* Container das abas superiores */
+.modulo-painel-atendimento .abas-container {
+  display: flex;
+  background: #fff;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 2px solid var(--color-border);
+  gap: 0;
+  align-items: center;
+  margin-bottom: 0;    /* anula margin-bottom:20px do .abas-container global */
+  flex-shrink: 0;      /* garante que não encolhe na cadeia flex */
+}
+.modulo-painel-atendimento .abas-conteudo {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+/* Botões das abas */
+.modulo-painel-atendimento .aba-btn {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #666;
+  border-bottom: 3px solid transparent;
+  transition: var(--transition);
+  font-size: 14px;
+}
+
+.modulo-painel-atendimento .aba-btn:hover {
+  color: var(--color-primary);
+  background: rgba(0, 102, 255, 0.05);
+}
+
+.modulo-painel-atendimento .aba-btn.ativa {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  background: transparent;
+}
+
+/* Indicador de status do ticket */
+.modulo-painel-atendimento .ticket-status-indicator {
+  margin-left: auto;
+  padding-right: 20px;
+}
+
+.modulo-painel-atendimento .status-badge {
+  background: var(--color-warning);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Conteúdo das abas */
+.modulo-painel-atendimento .aba-conteudo-container {
+  display: none;
+  flex: 1;
+  overflow: hidden;
+}
+
+.modulo-painel-atendimento .aba-conteudo-container.ativa {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Sub-abas (usado no histórico) */
+.sub-abas-historico {
+  display: flex;
+  gap: 8px;
+  padding: var(--spacing-sm);
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+
+.sub-aba-btn {
+  border: none;
+  background: none;
+  padding: var(--spacing-xs) var(--spacing-md);
+  cursor: pointer;
+  font-weight: 600;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.sub-aba-btn.ativa {
+  background: var(--color-primary);
+  color: white;
+}
+
+.sub-aba-btn:hover:not(.ativa) {
+  background: #eee;
+}
+
+/* Estado vazio (quando não há ticket) */
+.modulo-painel-atendimento .empty-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  margin: 15px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+.modulo-painel-atendimento .empty-state-content {
+  text-align: center;
+  max-width: 400px;
+  padding: var(--spacing-lg);
+}
+
+.modulo-painel-atendimento .empty-state-content i {
+  font-size: 64px;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.modulo-painel-atendimento .empty-state-content h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .empty-state-content p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.modulo-painel-atendimento .empty-state-stats {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.modulo-painel-atendimento .stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.modulo-painel-atendimento .stat-label {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.modulo-painel-atendimento .stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ============================================================

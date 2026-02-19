@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Lujo Network CRM</title>
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="./css/login.css">
+  <script type="module" src="./js/core/firebase-config.js"></script>
+  <script src="./js/config/permissions.js"></script>
+  <script type="module" src="./js/core/auth.js"></script>
+  
+</head>
+<body>
+
+  <!-- TELA DE LOGIN -->
+  <div class="login-container" id="loginScreen">
+    <div class="login-header">
+      <h1>Lujo Network</h1>
+      <p>Sistema de Gerenciamento CRM</p>
+    </div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Usuário/E-mail</label>
+        <div class="input-wrapper">
+          <i class="fi fi-rr-user"></i>
+          <input type="text" id="username" placeholder="Digite seu usuário/e-mail" required>
+        </div>
+        <span class="error-message" id="usernameError">Usuário inválido</span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <div class="input-wrapper">
+          <i class="fi fi-rr-lock"></i>
+          <input type="password" id="password" placeholder="Digite sua senha" required>
+        </div>
+        <span class="error-message" id="passwordError">Senha inválida</span>
+      </div>
+
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" id="rememberMe">
+          <span>Lembrar-me</span>
+        </label>
+        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="loginBtn">
+        Entrar
+      </button>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+      </div>
+    </form>
+
+    <!-- PERFIS DE TESTE -->
+    <div class="test-profiles">
+      <h3>👤 Perfis de Teste (clique para preencher)</h3>
+      <div class="profile-chips">
+          <span class="profile-chip" data-user="ana" data-pass="123456">Atendente</span>
+          <span class="profile-chip" data-user="carlos" data-pass="123456">Supervisor</span>
+          <span class="profile-chip" data-user="marina" data-pass="123456">Gerente</span>
+          <span class="profile-chip" data-user="juan" data-pass="123456">Copyright</span>
+          <span class="profile-chip" data-user="admin" data-pass="123456">Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD (APÓS LOGIN) -->
+  <div class="dashboard" id="dashboard">
+    <div class="dashboard-header">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">A</div>
+        <div class="user-details">
+          <h3 id="userName">Usuário</h3>
+          <span class="user-badge" id="userRole">Atendente</span>
+        </div>
+      </div>
+      <button class="btn-logout" id="btnLogout">
+        <i class="fi fi-rr-exit"></i> Sair
+      </button>
+    </div>
+
+    <div class="dashboard-content">
+      <div class="welcome-card">
+        <h2>Bem-vindo ao sistema! 👋</h2>
+        <p>Você está logado como <strong id="roleDisplay">Atendente</strong></p>
+        <p style="margin-top: 10px; color: #666;">Este é um sistema de autenticação frontend. Abaixo você pode ver os módulos disponíveis para seu perfil.</p>
+      </div>
+
+      <h3 style="margin-bottom: 15px; color: var(--color-text);">Módulos Disponíveis</h3>
+      <div class="permissions-grid" id="permissionsGrid">
+        <!-- Será preenchido dinamicamente -->
+      </div>
+    </div>
+  </div>
+  
+
+
+</body>
+</html>

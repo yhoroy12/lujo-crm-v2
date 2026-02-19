@@ -1,0 +1,477 @@
+<section class="modulo-painel-gerencia">
+  <div class="painel-gerencia">
+
+    <!-- NAVEGAÇÃO DAS ABAS PRINCIPAIS -->
+    <div class="aba-nav">
+      <button class="aba-btn ativa" data-aba="aba-supervisor">Supervisão</button>
+      <button class="aba-btn" data-aba="aba-Gerencia">Gerência</button>
+      <button class="aba-btn" data-aba="aba-relatorios">Resultados</button>
+    </div>
+
+    <!-- ABA 1 – SUPERVISÃO -->
+    <div class="aba-conteudo aba-supervisor ativa">
+      <div class="supervisor-grid">
+        <div class="card-atendente">
+          <h2>Atendentes</h2>
+          <label for="selectAtendente" class="label-select">Selecionar Atendente:</label>
+          <select id="selectAtendente" class="select-atendente">
+            <option value="">-- selecione --</option>
+            <option value="at01">Ana Silva</option>
+            <option value="at02">Carlos Souza</option>
+            <option value="at03">Marina Lopes</option>
+          </select>
+          <hr style="margin: 15px 0; opacity: .3;">
+          <div id="atendenteInfo" class="atendente-info">
+            <h3>Informações do Atendente</h3>
+            <div class="info-grid">
+              <div class="info-item">
+                <strong>Atendimentos Totais</strong>
+                <p>Hoje: <span id="totaisHoje">0</span></p>
+                <p>Semana: <span id="totaisSemana">0</span></p>
+                <p>Mês: <span id="totaisMes">0</span></p>
+              </div>
+              <div class="info-item">
+                <strong>Derivados</strong>
+                <p>Hoje: <span id="derivadosHoje">0</span></p>
+                <p>Semana: <span id="derivadosSemana">0</span></p>
+                <p>Mês: <span id="derivadosMes">0</span></p>
+              </div>
+              <div class="info-item">
+                <strong>E-mails Finalizados</strong>
+                <p><span id="emailsFinalizados">0</span></p>
+              </div>
+              <div class="info-item">
+                <strong>Em Atendimento</strong>
+                <p><span id="emAtendimento">0</span></p>
+              </div>
+              <div class="info-item">
+                <strong>Tempo Médio de Atendimento</strong>
+                <p><span id="tempoMedio">00:00</span></p>
+              </div>
+              <div class="info-item">
+                <strong>Taxa de Conclusão</strong>
+                <p><span id="taxaConclusao">0%</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card chat-card">
+          <div class="chat-header">
+            <h2>Chat</h2>
+            <select class="chat-select">
+              <option selected disabled>Selecione um atendimento</option>
+              <option>Cliente 1 - Pedido #3021</option>
+              <option>Cliente 2 - Suporte Técnico</option>
+              <option>Cliente 3 - Financeiro</option>
+            </select>
+          </div>
+          <div class="chat-box whatsapp-style">
+            <div class="msg msg-left">
+              <p>Olá, preciso de ajuda com meu pedido.</p>
+              <span class="msg-hora">14:32</span>
+            </div>
+            <div class="msg msg-right">
+              <p>Claro, poderia confirmar o número, por favor?</p>
+              <span class="msg-hora">14:33</span>
+            </div>
+            <div class="msg msg-left">
+              <p>É o 3021.</p>
+              <span class="msg-hora">14:34</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fila-card">
+          <div class="fila-header">
+            <h2>Fila de Atendimento</h2>
+            <span id="filaStatus" class="fila-status-circle verde"></span>
+          </div>
+          <div class="fila-lista">
+            <div class="cliente-item">
+              <span class="cliente-nome">Carlos Menezes</span>
+              <span class="cliente-tempo">Aguardando há 2 min</span>
+            </div>
+            <div class="cliente-item">
+              <span class="cliente-nome">Julia Santos</span>
+              <span class="cliente-tempo">Aguardando há 5 min</span>
+            </div>
+            <div class="cliente-item">
+              <span class="cliente-nome">Roberto Lima</span>
+              <span class="cliente-tempo">Aguardando há 8 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 2 – GERÊNCIA -->
+    <div class="aba-conteudo aba-Gerencia">
+      <div class="gerencia-nav">
+        <button class="sub-aba-btn ativa" data-sub-aba="sub-aba-pedidos">Pedidos Pendentes</button>
+        <button class="sub-aba-btn" data-sub-aba="sub-aba-indicadores">Indicadores</button>
+        <button class="sub-aba-btn" data-sub-aba="sub-aba-operadores">Operadores</button>
+        <button class="sub-aba-btn" data-sub-aba="sub-aba-controle">Controle</button>
+      </div>
+
+      <!-- SUB-ABA: PEDIDOS PENDENTES -->
+      <div class="sub-aba-conteudo sub-aba-pedidos ativa">
+        <div class="gerencia-grid">
+          <div class="card pedidos-lista">
+            <h2>Pedidos Pendentes</h2>
+            <ul id="listaPedidos">
+              <li class="pedido-item">
+                <span>Pedido #0001 - Advanced</span>
+                <button class="btn-detalhes" data-pedido-id="0001">Ver Detalhes</button>
+                <button class="btn-aprovar">Aprovar</button>
+                <button class="btn-reprovar">Rejeitar</button>
+              </li>
+              <li class="pedido-item">
+                <span>Pedido #0002 - Takedown</span>
+                <button class="btn-detalhes" data-pedido-id="0002">Ver Detalhes</button>
+                <button class="btn-aprovar">Aprovar</button>
+                <button class="btn-reprovar">Rejeitar</button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card pedido-detalhes" id="painelDetalhes">
+            <div class="painel-header">
+              <h3 id="detalhesTitulo">Pedido #ID</h3>
+              <button id="fecharDetalhes" class="btn-fechar">X</button>
+            </div>
+            <div class="detalhes-info">
+              <p><strong>Cliente:</strong> <span id="detalhesCliente">-</span></p>
+              <p><strong>Email:</strong> <span id="detalhesEmail">-</span></p>
+              <p><strong>Tipo:</strong> <span id="detalhesTipo">-</span></p>
+              <p><strong>Data/Hora:</strong> <span id="detalhesDataHora">-</span></p>
+              <p><strong>Status:</strong> <span id="detalhesStatus">-</span></p>
+              <p><strong>Responsável:</strong> <span id="detalhesResponsavel">-</span></p>
+            </div>
+            <div class="detalhes-descricao">
+              <h4>Descrição da Solicitação</h4>
+              <p id="detalhesDescricao">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-ABA: INDICADORES -->
+      <div class="sub-aba-conteudo sub-aba-indicadores">
+        <div class="card">
+          <div class="indicadores-header">
+            <div>
+              <h2 class="indicadores-title">Indicadores</h2>
+            </div>
+            <div class="indicadores-filtros">
+              <select>
+                <option>Hoje</option>
+                <option>Últimos 7 dias</option>
+                <option>Últimos 30 dias</option>
+                <option>Mês atual</option>
+              </select>
+              <button class="btn btn-secondary btn-sm">
+                <i class="fi fi-rr-refresh"></i> Atualizar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpis-grid">
+          <div class="kpi-card">
+            <p class="kpi-label">Total de Atendimentos</p>
+            <div class="kpi-value-row">
+              <h2 class="kpi-value">247</h2>
+              <span class="kpi-trend positive">
+                <i class="fi fi-rr-arrow-small-up"></i> +12%
+              </span>
+            </div>
+            <div class="kpi-subtitle">vs. período anterior</div>
+          </div>
+
+          <div class="kpi-card">
+            <p class="kpi-label">Concluídos</p>
+            <div class="kpi-value-row">
+              <h2 class="kpi-value">189</h2>
+              <span class="kpi-trend positive">
+                <i class="fi fi-rr-arrow-small-up"></i> +8%
+              </span>
+            </div>
+            <div class="kpi-subtitle">76% do total</div>
+          </div>
+
+          <div class="kpi-card">
+            <p class="kpi-label">Pendentes</p>
+            <div class="kpi-value-row">
+              <h2 class="kpi-value">58</h2>
+              <span class="kpi-trend neutral">
+                <i class="fi fi-rr-arrow-small-right"></i> +3
+              </span>
+            </div>
+            <div class="kpi-subtitle">necessitam atenção</div>
+          </div>
+
+          <div class="kpi-card">
+            <p class="kpi-label">TMA Médio</p>
+            <div class="kpi-value-row">
+              <h2 class="kpi-value">8:34</h2>
+              <span class="kpi-trend positive">
+                <i class="fi fi-rr-arrow-small-down"></i> -12%
+              </span>
+            </div>
+            <div class="kpi-subtitle">tempo médio de atendimento</div>
+          </div>
+
+          <div class="kpi-card">
+            <p class="kpi-label">SLA Compliance</p>
+            <div class="kpi-value-row">
+              <h2 class="kpi-value">94%</h2>
+              <span class="kpi-trend positive">
+                <i class="fi fi-rr-check"></i> Meta
+              </span>
+            </div>
+            <div class="kpi-subtitle">dentro do objetivo</div>
+          </div>
+        </div>
+
+        <div class="graficos-grid">
+          <div class="grafico-card">
+            <h3 class="grafico-header">Atendimentos por Hora</h3>
+            <div class="grafico-placeholder">
+              <div class="barra-container">
+                <div class="barra secondary" style="height: 45%;"></div>
+                <span class="barra-label">08h</span>
+              </div>
+              <div class="barra-container">
+                <div class="barra secondary" style="height: 62%;"></div>
+                <span class="barra-label">09h</span>
+              </div>
+              <div class="barra-container">
+                <div class="barra primary" style="height: 85%;"></div>
+                <span class="barra-label">10h</span>
+              </div>
+              <div class="barra-container">
+                <div class="barra primary" style="height: 95%;"></div>
+                <span class="barra-label">11h</span>
+              </div>
+              <div class="barra-container">
+                <div class="barra primary" style="height: 78%;"></div>
+                <span class="barra-label">12h</span>
+              </div>
+              <div class="barra-container">
+                <div class="barra secondary" style="height: 52%;"></div>
+                <span class="barra-label">13h</span>
+              </div>
+              <div class="barra-container">
+                <div class="barra secondary" style="height: 68%;"></div>
+                <span class="barra-label">14h</span>
+              </div>
+              <div class="barra-container">
+                <div class="barra primary" style="height: 82%;"></div>
+                <span class="barra-label">15h</span>
+              </div>
+            </div>
+            <div class="grafico-footer">Pico de atendimentos: 11h - 15h</div>
+          </div>
+
+          <div class="grafico-card">
+            <h3 class="grafico-header">Status dos Atendimentos</h3>
+            <div class="rosca-container">
+              <div class="rosca-outer">
+                <div class="rosca-inner">
+                  <span class="rosca-value">247</span>
+                  <span class="rosca-label">Total</span>
+                </div>
+              </div>
+            </div>
+            <div class="rosca-legenda">
+              <div class="legenda-item">
+                <div class="legenda-cor" style="background: var(--color-success);"></div>
+                <span class="legenda-texto">Concluídos (76%)</span>
+              </div>
+              <div class="legenda-item">
+                <div class="legenda-cor" style="background: var(--color-warning);"></div>
+                <span class="legenda-texto">Pendentes (24%)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gerencia-grid">
+          <div class="card">
+            <h3 class="grafico-header">Performance dos Operadores</h3>
+            <table class="performance-table">
+              <thead>
+                <tr>
+                  <th>Operador</th>
+                  <th class="center">Atend.</th>
+                  <th class="center">TMA</th>
+                  <th class="center">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="operador-info">
+                      <div class="operador-avatar" style="background: #e3f2fd; color: var(--color-primary);">AS</div>
+                      <span>Ana Silva</span>
+                    </div>
+                  </td>
+                  <td class="center"><strong>47</strong></td>
+                  <td class="center">7:23</td>
+                  <td class="center">
+                    <span class="status-badge status-active">Online</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="operador-info">
+                      <div class="operador-avatar" style="background: #fff3cd; color: #856404;">CS</div>
+                      <span>Carlos Souza</span>
+                    </div>
+                  </td>
+                  <td class="center"><strong>52</strong></td>
+                  <td class="center">8:45</td>
+                  <td class="center">
+                    <span class="status-badge status-active">Online</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="operador-info">
+                      <div class="operador-avatar" style="background: #e6f6ea; color: #1a7b3f;">ML</div>
+                      <span>Marina Lopes</span>
+                    </div>
+                  </td>
+                  <td class="center"><strong>38</strong></td>
+                  <td class="center">9:12</td>
+                  <td class="center">
+                    <span class="status-badge status-pendente">Pausa</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="operador-info">
+                      <div class="operador-avatar" style="background: #ffebee; color: #c62828;">JC</div>
+                      <span>Juan Copyright</span>
+                    </div>
+                  </td>
+                  <td class="center"><strong>31</strong></td>
+                  <td class="center">6:54</td>
+                  <td class="center">
+                    <span class="status-badge status-active">Online</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="table-footer">
+              <button class="btn btn-secondary btn-sm">Ver Todos os Operadores</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="grafico-header">Alertas e Notificações</h3>
+            <div class="alertas-lista">
+              <div class="alerta-item warning">
+                <i class="fi fi-rr-triangle-warning alerta-icon" style="color: var(--color-warning);"></i>
+                <div class="alerta-content">
+                  <strong class="alerta-titulo">Fila acima do esperado</strong>
+                  <p class="alerta-texto">12 clientes aguardando há mais de 5 minutos</p>
+                  <span class="alerta-tempo">há 3 minutos</span>
+                </div>
+              </div>
+
+              <div class="alerta-item danger">
+                <i class="fi fi-rr-exclamation alerta-icon" style="color: var(--color-danger);"></i>
+                <div class="alerta-content">
+                  <strong class="alerta-titulo">SLA em risco</strong>
+                  <p class="alerta-texto">3 atendimentos próximos do limite de tempo</p>
+                  <span class="alerta-tempo">há 8 minutos</span>
+                </div>
+              </div>
+
+              <div class="alerta-item info">
+                <i class="fi fi-rr-info alerta-icon" style="color: var(--color-primary);"></i>
+                <div class="alerta-content">
+                  <strong class="alerta-titulo">Operador em pausa</strong>
+                  <p class="alerta-texto">Marina Lopes entrou em pausa às 14:35</p>
+                  <span class="alerta-tempo">há 15 minutos</span>
+                </div>
+              </div>
+
+              <div class="alerta-item success">
+                <i class="fi fi-rr-check-circle alerta-icon" style="color: var(--color-success);"></i>
+                <div class="alerta-content">
+                  <strong class="alerta-titulo">Meta atingida</strong>
+                  <p class="alerta-texto">SLA de 90% foi alcançado hoje</p>
+                  <span class="alerta-tempo">há 1 hora</span>
+                </div>
+              </div>
+            </div>
+            <div class="table-footer">
+              <button class="btn btn-secondary btn-sm">Ver Todos os Alertas</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-ABA: OPERADORES -->
+      <div class="sub-aba-conteudo sub-aba-operadores">
+        <div class="operadores-grid">
+          <!-- Sidebar com lista de operadores -->
+          <div class="operadores-sidebar">
+            <div class="sidebar-header">
+              <h3>Minha Equipe</h3>
+              <span class="badge" style="background: var(--color-primary); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px;">4 ativos</span>
+            </div>
+            <div class="operadores-lista" id="listaOperadores">
+              <!-- Preenchido via JS -->
+            </div>
+          </div>
+
+          <!-- Área de detalhes -->
+          <div class="operador-detalhes" id="operadorDetalhes">
+            <div class="empty-state">
+              <i class="fi fi-rr-users"></i>
+              <h3>Selecione um Operador</h3>
+              <p>Escolha um membro da equipe para visualizar detalhes e métricas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-ABA: CONTROLE -->
+      <div class="sub-aba-conteudo sub-aba-controle">
+        <div class="card hierarquia-alerta">
+          <i class="fi fi-rr-shield-check"></i>
+          <div class="hierarquia-alerta-content">
+            <strong>Controle de Permissões Hierárquico</strong>
+            <p>Você pode gerenciar apenas perfis e permissões da sua área. Permissões de outras áreas são bloqueadas automaticamente.</p>
+          </div>
+        </div>
+
+        <div class="controle-grid" id="controleGrid">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 3 – RESULTADOS -->
+    <div class="aba-conteudo aba-relatorios">
+      <div class="supervisor-grid">
+        <div class="card">
+          <h2>Métricas Gerais</h2>
+          <p>Resultados globais do time.</p>
+        </div>
+        <div class="card">
+          <h2>Gráficos</h2>
+          <p>Representações visuais do desempenho.</p>
+        </div>
+        <div class="card">
+          <h2>Exportações</h2>
+          <p>Ferramentas para exportar relatórios.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

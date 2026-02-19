@@ -1,0 +1,714 @@
+/* ==================================================================================
+   ABAS/ABA-HISTORICO.CSS - Módulo abas - aba-historico
+   Autor: Sistema Lujo Network
+   Última atualização: 2025
+   
+   Este arquivo faz parte da estrutura modular CSS do módulo de atendimento.
+   Veja ESTRUTURA_MODULAR.md para documentação completa.
+==================================================================================
+[7] MÓDULO HISTÓRICO - VISUALIZAÇÃO DE ATENDIMENTOS
+============================================================ */
+
+.modulo-painel-atendimento .historico-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-secondary);
+  padding: 20px;
+  gap: 20px;
+}
+
+/* --- HEADER COM FILTROS --- */
+.modulo-painel-atendimento .historico-header {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.modulo-painel-atendimento .historico-header h2 {
+  font-size: 20px;
+  margin: 0;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modulo-painel-atendimento .historico-header h2 i {
+  font-size: 24px;
+  color: var(--color-primary);
+}
+
+/* Busca */
+.modulo-painel-atendimento .historico-search {
+  position: relative;
+}
+
+.modulo-painel-atendimento .historico-search input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  background: var(--color-secondary);
+}
+
+.modulo-painel-atendimento .historico-search i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 16px;
+}
+
+/* ⚠️ PROTEGER - Grid de filtros
+   grid-template-columns é crítico para layout responsivo */
+.modulo-painel-atendimento .historico-filtros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.modulo-painel-atendimento .filtro-historico {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modulo-painel-atendimento .filtro-historico label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.modulo-painel-atendimento .filtro-historico select,
+.modulo-painel-atendimento .filtro-historico input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  background: white;
+  color: var(--color-text);
+  transition: var(--transition);
+}
+
+.modulo-painel-atendimento .filtro-historico select:focus,
+.modulo-painel-atendimento .filtro-historico input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* ⚠️ PROTEGER - Grid de estatísticas
+   Não alterar grid-template-columns */
+.modulo-painel-atendimento .historico-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.modulo-painel-atendimento .stat-historico {
+  background: var(--color-secondary);
+  padding: 5px;
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--color-border);
+}
+
+.modulo-painel-atendimento .stat-historico-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.modulo-painel-atendimento .stat-historico-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* --- LISTA DE CARDS --- */
+.modulo-painel-atendimento .historico-lista {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  padding: 20px 5px;
+  height: auto;
+  min-width: 100px;
+  align-items: start;
+  position: relative !important; /* Isso força o card a respeitar o grid */
+    top: auto !important;
+    left: auto !important;
+    width: 100%;
+}
+
+
+
+.modulo-painel-atendimento .historico-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 18px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.modulo-painel-atendimento .historico-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.modulo-painel-atendimento .historico-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modulo-painel-atendimento .ticket-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modulo-painel-atendimento .ticket-status-historico {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.modulo-painel-atendimento .ticket-status-historico.concluido {
+  background: #e6f6ea;
+  color: #1a7b3f;
+}
+
+.modulo-painel-atendimento .ticket-status-historico.derivado {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.modulo-painel-atendimento .ticket-status-historico.reaberto {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.modulo-painel-atendimento .historico-cliente {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modulo-painel-atendimento .historico-cliente i {
+  font-size: 18px;
+  color: var(--color-primary);
+}
+
+.modulo-painel-atendimento .historico-tipo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--color-secondary);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+.modulo-painel-atendimento .historico-datas {
+  display: flex;
+  gap: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.modulo-painel-atendimento .data-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modulo-painel-atendimento .data-label {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.modulo-painel-atendimento .data-value {
+  font-size: 13px;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* Badges de setor */
+.modulo-painel-atendimento .historico-setor {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.modulo-painel-atendimento .historico-setor.financeiro {
+  background: #e6f6ea;
+  color: #1a7b3f;
+}
+
+.modulo-painel-atendimento .historico-setor.copyright {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.modulo-painel-atendimento .historico-setor.marketing {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.modulo-painel-atendimento .historico-setor.tecnico {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.modulo-painel-atendimento .historico-setor.conteudo {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.modulo-painel-atendimento .historico-setor.atendimento {
+  background: #f5f5f5;
+  color: #616161;
+}
+
+/* ============================================================
+   ESTILIZAÇÃO DOS CARDS DE E-MAIL (HISTÓRICO)
+============================================================ */
+
+/* Container principal do card de e-mail */
+.historico-item.card-email {
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 20px;
+}
+
+.historico-item.card-email:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(11, 102, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Indicador lateral de canal (Vermelho Gmail) */
+.historico-item.card-email::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #ea4335;
+  /* Cor característica do Gmail */
+}
+
+/* Bloco de informações principais */
+.card-email-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-email-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-email-sender {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.badge-gmail-tag {
+  background: #fff0f0;
+  color: #d93025;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #f8d7da;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-email-subject {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
+}
+
+/* Bloco de Metadados (Data/Hora) */
+.card-email-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.meta-item i {
+  font-size: 14px;
+}
+
+/* Lado direito: Status e Ação */
+.card-email-aside {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.status-email-pill {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.status-email-pill.enviado {
+  background: #e3fcef;
+  color: #00875a;
+}
+
+.status-email-pill.devolvido {
+  background: #fff0ed;
+  color: #de350b;
+}
+
+.btn-view-email {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-view-email:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* Estado vazio */
+.modulo-painel-atendimento .historico-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  color: #999;
+}
+
+.modulo-painel-atendimento .historico-empty i {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.3;
+}
+
+.modulo-painel-atendimento .historico-empty h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.modulo-painel-atendimento .historico-empty p {
+  font-size: 14px;
+}
+
+/* --- MODAL DE DETALHES --- */
+.modulo-painel-atendimento .modal-historico-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  backdrop-filter: blur(2px);
+}
+
+.modulo-painel-atendimento .modal-historico-overlay.active {
+  display: flex;
+}
+
+.modulo-painel-atendimento .modal-historico-content {
+  background: white;
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: modalSlide 0.3s ease;
+}
+
+.modulo-painel-atendimento .modal-historico-header {
+  padding: 25px;
+  background: var(--color-secondary);
+  border-bottom: 2px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modulo-painel-atendimento .modal-historico-header h3 {
+  font-size: 22px;
+  margin: 0 0 8px 0;
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .modal-ticket-number {
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+
+.modulo-painel-atendimento .modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #999;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.modulo-painel-atendimento .modal-close-btn:hover {
+  background: #f0f0f0;
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .modal-historico-body {
+  padding: 25px;
+}
+
+.modulo-painel-atendimento .modal-section {
+  margin-bottom: 25px;
+}
+
+.modulo-painel-atendimento .modal-section:last-child {
+  margin-bottom: 0;
+}
+
+.modulo-painel-atendimento .modal-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modulo-painel-atendimento .modal-section-title i {
+  font-size: 18px;
+  color: var(--color-primary);
+}
+
+.modulo-painel-atendimento .info-grid-modal {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  background: var(--color-secondary);
+  padding: 15px;
+  border-radius: var(--radius);
+}
+
+.modulo-painel-atendimento .info-item-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modulo-painel-atendimento .info-label-modal {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.modulo-painel-atendimento .info-value-modal {
+  font-size: 14px;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* Validação de identidade no modal */
+.modulo-painel-atendimento .validacao-identidade {
+  background: #e6f6ea;
+  padding: 15px;
+  border-radius: var(--radius);
+  border: 1px solid #1a7b3f;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modulo-painel-atendimento .validacao-identidade.nao-validada {
+  background: #ffebee;
+  border-color: #c62828;
+}
+
+.modulo-painel-atendimento .validacao-icon {
+  font-size: 32px;
+}
+
+.modulo-painel-atendimento .validacao-icon.validada {
+  color: #1a7b3f;
+}
+
+.modulo-painel-atendimento .validacao-icon.nao-validada {
+  color: #c62828;
+}
+
+.modulo-painel-atendimento .validacao-text {
+  flex: 1;
+}
+
+.modulo-painel-atendimento .validacao-text strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.modulo-painel-atendimento .validacao-text p {
+  font-size: 13px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.modulo-painel-atendimento .descricao-box {
+  background: var(--color-secondary);
+  padding: 15px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+.modulo-painel-atendimento .descricao-box p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* Timeline no modal */
+.modulo-painel-atendimento .timeline-modal {
+  position: relative;
+  padding-left: 25px;
+}
+
+.modulo-painel-atendimento .timeline-item-modal {
+  position: relative;
+  padding-bottom: 20px;
+  border-left: 2px solid #e0e0e0;
+  padding-left: 20px;
+}
+
+.modulo-painel-atendimento .timeline-item-modal:last-child {
+  padding-bottom: 0;
+  border-left: none;
+}
+
+.modulo-painel-atendimento .timeline-dot-modal {
+  position: absolute;
+  left: -6px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.modulo-painel-atendimento .timeline-content-modal {
+  font-size: 13px;
+}
+
+.modulo-painel-atendimento .timeline-time-modal {
+  color: #999;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.modulo-painel-atendimento .timeline-text-modal {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.modulo-painel-atendimento .modal-historico-footer {
+  padding: 20px 25px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-secondary);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+

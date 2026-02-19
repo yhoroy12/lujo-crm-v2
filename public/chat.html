@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Atendimento - Lujo Network</title>
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/interface-chat-client.css">
+
+</head>
+
+<body>
+
+  <!-- ===== CONTAINER PRINCIPAL ===== -->
+  <div class="chat-container" id="chatContainer">
+
+    <!-- ===== HEADER FIXO ===== -->
+    <header class="chat-header">
+      <div class="header-content">
+        <div class="logo">
+          <!-- <img src="../public/img/logo-lujo.png" alt="Lujo Network"> -->
+          <i class="fi fi-rr-headset"></i>
+          <span>Lujo Network</span>
+        </div>
+        <div class="header-status" id="headerStatus">
+          <span class="status-dot"></span>
+          <span class="status-text">Offline</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== ÁREA DE CONTEÚDO DINÂMICO ===== -->
+    <main class="chat-content" id="chatContent">
+
+      <!-- ========== TELA 1: BEM-VINDO ========== -->
+      <section class="screen active" id="screenWelcome">
+        <div class="welcome-container">
+          <div class="welcome-icon">
+            <i class="fi fi-rr-comment-smile"></i>
+          </div>
+          <h1>Olá! Seja bem-vindo(a)</h1>
+          <p>Estamos aqui para ajudar você com suas dúvidas e solicitações.</p>
+
+          <div class="info-cards">
+            <div class="info-card">
+              <i class="fi fi-rr-clock"></i>
+              <span>Atendimento rápido</span>
+            </div>
+            <div class="info-card">
+              <i class="fi fi-rr-shield-check"></i>
+              <span>Suporte especializado</span>
+            </div>
+            <div class="info-card">
+              <i class="fi fi-rr-time-check"></i>
+              <span>Disponível</span>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-large" id="btnIniciarAtendimento">
+            Iniciar Atendimento
+          </button>
+
+          <p class="disclaimer">
+            Ao continuar, você concorda com nossos termos de uso e política de privacidade.
+          </p>
+        </div>
+      </section>
+
+      <!-- ========== TELA 2: IDENTIFICAÇÃO DA CONTA ========== -->
+      <section class="screen" id="screenIdentificarConta">
+        <div class="form-container">
+          <button class="btn-back" id="btnVoltarWelcome">
+            <i class="fi fi-rr-arrow-left"></i>
+          </button>
+
+          <div class="form-header">
+            <div class="step-indicator">
+              <span class="step active">1</span>
+              <span class="step">2</span>
+              <span class="step">3</span>
+            </div>
+            <h2>Identificação da Conta</h2>
+            <p>Digite o e-mail cadastrado na sua conta</p>
+          </div>
+
+          <form id="formIdentificarConta">
+            <div class="form-group">
+              <label for="emailConta">
+                <i class="fi fi-rr-envelope"></i>
+                E-mail da conta
+              </label>
+              <input type="email" id="emailConta" placeholder="seu@email.com" required autocomplete="email">
+              <span class="helper-text">Utilize o e-mail cadastrado no sistema</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large">
+              <i class="fi fi-rr-arrow-right"></i>
+              Continuar
+            </button>
+          </form>
+
+          <!-- Múltiplas contas encontradas -->
+          <div class="contas-list hidden" id="contasList">
+            <h3>Selecione a conta</h3>
+            <p>Encontramos múltiplas contas com este e-mail:</p>
+            <div id="contasContainer"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== TELA 3: IDENTIFICAÇÃO DA PESSOA ========== -->
+      <section class="screen" id="screenIdentificarPessoa">
+        <div class="form-container">
+          <button class="btn-back" id="btnVoltarConta">
+            <i class="fi fi-rr-arrow-left"></i>
+            Voltar
+          </button>
+
+          <div class="form-header">
+            <div class="step-indicator">
+              <span class="step completed">1</span>
+              <span class="step active">2</span>
+              <span class="step">3</span>
+            </div>
+            <h2>Seus Dados</h2>
+            <p>Como podemos te chamar?</p>
+          </div>
+
+          <form id="formIdentificarPessoa">
+            <div class="form-group">
+              <label for="nomeCompleto">
+                <i class="fi fi-rr-user"></i>
+                Nome completo
+              </label>
+              <input type="text" id="nomeCompleto" placeholder="João Silva" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label for="telefone">
+                <i class="fi fi-rr-phone-call"></i>
+                Telefone (WhatsApp)
+              </label>
+              <input type="tel" id="telefone" placeholder="(11) 99999-9999" required autocomplete="tel">
+              <span class="helper-text">Usado apenas para este atendimento</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large">
+              <i class="fi fi-rr-arrow-right"></i>
+              Entrar na Fila
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ========== TELA 4: AGUARDANDO NA FILA ========== -->
+      <section class="screen" id="screenFila">
+        <div class="queue-container">
+          <div class="queue-animation">
+            <div class="pulse-circle"></div>
+            <div class="pulse-circle delay-1"></div>
+            <div class="pulse-circle delay-2"></div>
+            <i class="fi fi-rr-clock"></i>
+          </div>
+
+          <h2>Você está na fila de atendimento</h2>
+
+          <div class="queue-info">
+            <div class="queue-stat">
+              <span class="stat-label">Posição na fila</span>
+              <span class="stat-value" id="posicaoFila">...</span>
+            </div>
+            <div class="queue-stat">
+              <span class="stat-label">Tempo estimado</span>
+              <span class="stat-value" id="tempoEstimado">...</span>
+            </div>
+          </div>
+
+          <div class="queue-message">
+            <i class="fi fi-rr-info"></i>
+            <p>Um operador irá atendê-lo em breve. Por favor, mantenha esta página aberta.</p>
+          </div>
+
+          <button class="btn btn-secondary" id="btnCancelarFila">
+            <i class="fi fi-rr-cross"></i>
+            Cancelar Atendimento
+          </button>
+        </div>
+      </section>
+
+      <!-- ========== TELA 5: CHAT ATIVO ========== -->
+      <section class="screen" id="screenChat">
+
+        <!-- Informações do Atendimento -->
+        <div class="chat-info" id="chatInfo">
+          <div class="operator-info" id="operatorInfo" style="display: none;">
+            <div class="operator-avatar">
+              <i class="fi fi-rr-user"></i>
+            </div>
+            <div class="operator-details">
+              <span class="operator-name" id="operatorName">Atendente</span>
+              <span class="operator-status">
+                <span class="status-dot online"></span>
+                Online
+              </span>
+            </div>
+          </div>
+
+          <div class="chat-timer" id="chatTimer">
+            <i class="fi fi-rr-clock"></i>
+            <span id="tempoAtendimento">00:00</span>
+          </div>
+        </div>
+
+        <!-- Área de Mensagens -->
+        <div class="messages-container" id="messagesContainer">
+          <!-- Mensagens renderizadas aqui via JavaScript -->
+        </div>
+
+        <!-- Input de Mensagem -->
+        <div class="message-input-container" id="messageInputContainer">
+          <div class="message-input-wrapper">
+            <textarea id="messageInput" placeholder="Digite sua mensagem..." rows="1" maxlength="1000"></textarea>
+            <button class="btn-attach" id="btnAttach" title="Anexar arquivo">
+              <i class="fi fi-rr-clip"></i>
+            </button>
+          </div>
+          <button class="btn-send" id="btnSend">
+            <i class="fi fi-rr-paper-plane"></i>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- ========== TELA 6: ATENDIMENTO FINALIZADO ========== -->
+      <section class="screen" id="screenFinalizado">
+        <div class="completed-container">
+          <div class="completed-icon">
+            <i class="fi fi-rr-check-circle"></i>
+          </div>
+
+          <h2>Atendimento Finalizado</h2>
+          <p>Obrigado por entrar em contato conosco!</p>
+
+          <div class="rating-container" id="ratingContainer">
+            <p>Como foi sua experiência?</p>
+            <div class="rating-stars">
+              <button class="star" data-rating="1">★</button>
+              <button class="star" data-rating="2">★</button>
+              <button class="star" data-rating="3">★</button>
+              <button class="star" data-rating="4">★</button>
+              <button class="star" data-rating="5">★</button>
+            </div>
+            <textarea id="comentarioAvaliacao" placeholder="Deixe um comentário (opcional)" rows="3"></textarea>
+            <button class="btn btn-primary" id="btnEnviarAvaliacao">
+              Enviar Avaliação
+            </button>
+          </div>
+
+          <button class="btn btn-primary btn-large" id="btnNovoAtendimento">
+            <i class="fi fi-rr-refresh"></i>
+            Iniciar Novo Atendimento
+          </button>
+
+          <!-- Histórico de mensagens (somente leitura) -->
+          <div class="history-container" id="historyContainer">
+            <h3>Histórico da Conversa</h3>
+            <div class="messages-readonly" id="messagesReadonly"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===== FOOTER FIXO (apenas informativo) ===== -->
+    <footer class="chat-footer">
+      <p>
+        <i class="fi fi-rr-shield-check"></i>
+        Suas informações estão seguras e protegidas
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- ===== LOADING GLOBAL ===== -->
+  <div class="loading-overlay hidden" id="loadingOverlay">
+    <div class="spinner"></div>
+    <p id="loadingText">Carregando...</p>
+  </div>
+
+  <!-- ===== TOAST NOTIFICATIONS ===== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- JavaScript -->
+
+</body>
+  <!-- Firebase -->
+  <script type="module" src="../js/core/firebase-config.js"></script>
+  
+  <!-- Managers -->
+  <script defer src="../js/modules/atendimento/services/atendimento-chat-sistem/atendimento-data-structure.js"></script>
+  <script defer src="../js/modules/atendimento/services/atendimento-chat-sistem/novo-cliente-notificacao-manager.js"></script>
+  <script defer src="../js/modules/atendimento/services/atendimento-chat-sistem/realtime-listeners-manager.js"></script>
+  <script defer src="../js/modules/atendimento/services/atendimento-chat-sistem/state-machine-manager.js"></script>
+  <!-- Serviço integrado -->
+  <script defer src="../js/modules/atendimento/services/atendimento-chat-sistem/atendimento-service-integrado.js"></script>
+  
+  <script defer src="../js/modules/atendimento/services/atendimento-service-chat.js"></script>
+
+</html>

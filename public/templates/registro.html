@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Completar Cadastro - Lujo Network</title>
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="./css/registro.css">
+  <script type="module" src="./js/core/firebase-config.js"></script>
+</head>
+<body>
+
+  <div class="registro-container" id="registroContainer">
+    
+    <!-- Estado: Verificando Convite -->
+    <div class="loading-state" id="loadingState">
+      <div class="spinner"></div>
+      <p>Verificando seu convite...</p>
+    </div>
+
+    <!-- Estado: Convite Inválido -->
+    <div class="error-state hidden" id="errorState">
+      <div class="error-icon">
+        <i class="fi fi-rr-cross-circle"></i>
+      </div>
+      <h2>Convite Inválido</h2>
+      <p id="errorMessage">Este link de convite não é válido ou já foi utilizado.</p>
+      <button class="btn btn-secondary" onclick="window.location.href='login.html'">
+        Voltar ao Login
+      </button>
+    </div>
+
+    <!-- Estado: Formulário de Registro -->
+    <div class="registro-form hidden" id="registroForm">
+      <div class="registro-header">
+        <h1>Complete seu Cadastro</h1>
+        <p>Você foi convidado para fazer parte da equipe Lujo Network</p>
+      </div>
+
+      <form id="formCompletarCadastro">
+        <!-- Informações do Convite -->
+        <div class="invite-info">
+          <div class="info-item">
+            <i class="fi fi-rr-user"></i>
+            <div>
+              <label>Nome Completo</label>
+              <input type="text" id="userName" readonly>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <i class="fi fi-rr-envelope"></i>
+            <div>
+              <label>E-mail</label>
+              <input type="email" id="userEmail" readonly>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <i class="fi fi-rr-shield-check"></i>
+            <div>
+              <label>Cargo</label>
+              <input type="text" id="userRole" readonly>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fi fi-rr-user-time"></i>
+            <div>
+              <label>Convidado por</label>
+              <input type="text" id="invitedBy" readonly>
+            </div>
+          </div>
+        </div>
+
+        <!-- Definir Senha -->
+        <div class="password-section">
+          <h3>Defina sua Senha</h3>
+          
+          <div class="form-group">
+            <label for="userPassword">Senha *</label>
+            <div class="input-wrapper">
+              <i class="fi fi-rr-lock"></i>
+              <input 
+                type="password" 
+                id="userPassword" 
+                placeholder="Mínimo 6 caracteres" 
+                required 
+                minlength="6"
+              >
+              <button type="button" class="toggle-password" id="togglePassword">
+                <i class="fi fi-rr-eye"></i>
+              </button>
+            </div>
+            <div class="password-strength" id="passwordStrength">
+              <div class="strength-bar">
+                <div class="strength-fill" id="strengthFill"></div>
+              </div>
+              <span class="strength-text" id="strengthText">Digite uma senha</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="userPasswordConfirm">Confirmar Senha *</label>
+            <div class="input-wrapper">
+              <i class="fi fi-rr-lock"></i>
+              <input 
+                type="password" 
+                id="userPasswordConfirm" 
+                placeholder="Digite a senha novamente" 
+                required 
+                minlength="6"
+              >
+            </div>
+            <span class="error-message" id="passwordMatchError">As senhas não coincidem</span>
+          </div>
+        </div>
+
+        <!-- Termos -->
+        <div class="terms-section">
+          <label class="checkbox-container">
+            <input type="checkbox" id="acceptTerms" required>
+            <span>Li e aceito os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a></span>
+          </label>
+        </div>
+
+        <!-- Ações -->
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="btnFinalizarCadastro">
+            <i class="fi fi-rr-check"></i>
+            Finalizar Cadastro
+          </button>
+        </div>
+
+        <div class="loading-inline hidden" id="loadingInline">
+          <div class="spinner-small"></div>
+          <span>Criando sua conta...</span>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script type="module" src="/functions/modulos/registro.js"></script>
+</body>
+</html>

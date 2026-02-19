@@ -1,0 +1,695 @@
+/* ==================================================================================
+   ABAS/ABA-ATENDIMENTO.CSS - Módulo abas - aba-atendimento
+   Autor: Sistema Lujo Network
+   Última atualização: 2025
+   
+   Este arquivo faz parte da estrutura modular CSS do módulo de atendimento.
+   Veja ESTRUTURA_MODULAR.md para documentação completa.
+==================================================================================
+
+MÓDULO WHATSAPP - CHAT E ATENDIMENTO
+
+============================================================ */
+.modulo-painel-atendimento .atendimento-workspace {
+  display: flex;
+  flex: 1; /* Alinha as colunas lado a lado */
+  flex-direction: row; /* Garante a direção horizontal */
+  gap: 15px; /* Espaçamento entre as colunas */
+  padding: 15px;
+  height: 100%; /* Ocupa a altura total disponível */
+  min-width: 0; /* Permite que as colunas encolham adequadamente */
+  overflow: hidden; /* Evita scroll na página inteira, o scroll deve ser interno às colunas */
+  box-sizing: border-box;
+  max-width: 100vw;  /* Não deixa passar da largura da tela */
+  max-height: 100%;  /* Não deixa passar da altura do pai */
+  overflow: hidden;  /* Corta qualquer coisa que tente sair */
+}
+/* Ajuste nas colunas para que respeitem o espaço */
+.modulo-painel-atendimento .workspace-context,
+.modulo-painel-atendimento .workspace-main,
+.modulo-painel-atendimento .workspace-support {
+  height: 100%; /* Força todas a terem a mesma altura do container pai */
+}
+
+/* --- COLUNA 1: CONTEXTO DO CLIENTE --- */
+.modulo-painel-atendimento .workspace-context {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 300px; /* Largura fixa para contexto */
+  min-width: 260px;
+}
+
+/* Header do contexto */
+.modulo-painel-atendimento .context-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modulo-painel-atendimento .ticket-id .label {
+  font-size: 11px;
+  color: #999;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modulo-painel-atendimento .ticket-id .value {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .ticket-state-badge {
+  padding: 4px 12px;
+  background: var(--color-secondary);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+/* Seções de informação */
+.modulo-painel-atendimento .context-section {
+  margin-bottom: 20px;
+}
+
+.modulo-painel-atendimento .section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .section-title i {
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+.modulo-painel-atendimento .section-title h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Grupos de informação */
+.modulo-painel-atendimento .info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modulo-painel-atendimento .info-item label {
+  font-size: 11px;
+  color: #666;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.modulo-painel-atendimento .info-item input {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  background: var(--color-secondary);
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .info-value {
+  font-size: 13px;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.modulo-painel-atendimento .channel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #e6f6ea;
+  color: #1a7b3f;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.modulo-painel-atendimento .timer {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Checklist de identidade */
+.modulo-painel-atendimento .identity-section {
+  background: #fff9e6;
+  padding: 15px;
+  border-radius: var(--radius);
+  border: 1px solid #ffd54f;
+}
+
+.modulo-painel-atendimento .identity-checklist {
+  background: white;
+  padding: 12px;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.modulo-painel-atendimento .checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .checkbox-item:last-child {
+  margin-bottom: 0;
+}
+
+.modulo-painel-atendimento .checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.modulo-painel-atendimento .btn-block {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Indicador SLA */
+.modulo-painel-atendimento .sla-section {
+  padding: 12px;
+  background: var(--color-secondary);
+  border-radius: var(--radius);
+}
+
+.modulo-painel-atendimento .sla-bar {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.modulo-painel-atendimento .sla-progress {
+  height: 100%;
+  background: var(--color-success);
+  transition: width 0.5s ease;
+}
+
+.modulo-painel-atendimento .sla-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.modulo-painel-atendimento .sla-label {
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.modulo-painel-atendimento .sla-time {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+/* --- COLUNA 2: ÁREA DE TRABALHO PRINCIPAL --- */
+
+/* ⚠️ CRÍTICO - Estrutura principal do chat
+   NÃO alterar display: flex e flex-direction
+   Isso garante que chat e input fiquem posicionados corretamente */
+.modulo-painel-atendimento .workspace-main {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  flex: 2.8; /* Ocupa a maior parte do espaço */
+  min-width: 480px;
+  min-height: 0; /* Permite que o container encolha corretamente */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Barra de ações superior */
+.modulo-painel-atendimento .action-bar {
+  padding: 15px 20px;
+  background: white;
+  border-bottom: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-height: 60px;
+}
+
+.modulo-painel-atendimento .action-bar-left {
+  flex: 1;
+}
+
+.modulo-painel-atendimento .action-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.modulo-painel-atendimento .action-bar .btn {
+  font-size: 14px;
+  white-space: nowrap;
+}
+.modulo-painel-atendimento .action-bar .info-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background: var(--color-secondary);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: #666;
+}
+
+.modulo-painel-atendimento .action-bar .info-block i {
+  font-size: 20px;
+  color: var(--color-primary);
+}
+
+/* ⚠️ CRÍTICO - Container do chat
+   min-height: 0 é ESSENCIAL para scroll funcionar
+   flex: 1 faz ocupar todo espaço disponível */
+.modulo-painel-atendimento .chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.modulo-painel-atendimento .chat-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+.modulo-painel-atendimento .chat-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+}
+.modulo-painel-atendimento .chat-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.modulo-painel-atendimento .btn-icon {
+  background: none;
+  border: 1px solid var(--color-border);
+  padding: 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  color: #666;
+}
+.modulo-painel-atendimento .btn-icon:hover {
+  background: var(--color-secondary);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+/* ⚠️ CRÍTICO - Área de mensagens (bolhas do chat)
+   MANTENHA border-radius e margin-bottom originais
+   Alterações aqui afetam visual das mensagens */
+.modulo-painel-atendimento .chatbox {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f8f9fa;
+  min-height: 0;
+  padding-bottom: 18px;
+}
+.modulo-painel-atendimento .chat-day-divider {
+  text-align: center;
+  margin: 10px 0;
+}
+.modulo-painel-atendimento .chat-day-divider span {
+  background: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  color: #999;
+  border: 1px solid var(--color-border);
+  text-transform: uppercase;
+}
+/* Mensagens - ⚠️ PRESERVAR border-radius específicos */
+.modulo-painel-atendimento .msg {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  position: relative;
+  word-wrap: break-word;
+}
+.modulo-painel-atendimento .msg.cliente {
+  align-self: flex-start;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-bottom-left-radius: 2px;
+  /* ⚠️ NÃO MODIFICAR */
+}
+.modulo-painel-atendimento .msg.atendente {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: white;
+  border-bottom-right-radius: 2px;
+  /* ⚠️ NÃO MODIFICAR */
+}
+.modulo-painel-atendimento .msg-content {
+  line-height: 1.4;
+}
+.modulo-painel-atendimento .msg-time {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-top: 4px;
+  text-align: right;
+}
+.modulo-painel-atendimento .msg.cliente .msg-time {
+  color: #666;
+  text-align: left;
+  font-size: 10px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+/* Input de chat - fixo na base */
+.modulo-painel-atendimento .chat-input-container {
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  padding: 5px 5px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+  background: white;
+  z-index: 5;
+}
+.modulo-painel-atendimento .chat-input-wrapper {
+  flex: 1;
+  background: var(--color-secondary);
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+}
+.modulo-painel-atendimento .chat-input-wrapper textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  max-height: 150px;
+  overflow-y: auto;
+}
+.modulo-painel-atendimento .chat-input-tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.modulo-painel-atendimento .btn-icon-sm {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #666;
+  font-size: 16px;
+  transition: var(--transition);
+}
+.modulo-painel-atendimento .btn-icon-sm:hover {
+  color: var(--color-primary);
+}
+
+.modulo-painel-atendimento .char-counter {
+  font-size: 11px;
+  color: #999;
+}
+.modulo-painel-atendimento .btn-send {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: 16px;
+}
+
+.modulo-painel-atendimento .btn-send:hover {
+  background: #0052cc;
+}
+/* Work-form (área horizontal com suporte) */
+.modulo-painel-atendimento .work-form {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  overflow: auto;
+  padding: 20px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-secondary);
+  min-height: 0;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.modulo-painel-atendimento .work-form.collapsed {
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  overflow: hidden;
+}
+.modulo-painel-atendimento .work-form .support-section {
+  flex: 1 1 300px;
+  min-width: 260px;
+  max-width: 420px;
+  box-sizing: border-box;
+  border-bottom: none;
+  padding: 20px;
+}
+
+/* --- COLUNA 3: SUPORTE E DETALHES --- */
+.modulo-painel-atendimento .workspace-support {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 350px; /* Largura fixa para suporte */
+  min-width: 280px;
+}
+
+.modulo-painel-atendimento .support-section {
+  padding: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modulo-painel-atendimento .support-section:last-child {
+  border-bottom: none;
+}
+
+.modulo-painel-atendimento .support-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+}
+.modulo-painel-atendimento .support-title i {
+  color: var(--color-primary);
+}
+/* Timeline */
+.modulo-painel-atendimento .timeline {
+  position: relative;
+  padding-left: 20px;
+}
+
+.modulo-painel-atendimento .timeline-item {
+  position: relative;
+  padding-bottom: 15px;
+}
+.modulo-painel-atendimento .timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.modulo-painel-atendimento .timeline-dot {
+  position: absolute;
+  left: -20px;
+  width: 10px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 50%;
+  top: 4px;
+}
+
+.modulo-painel-atendimento .timeline-dot.active {
+  background: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.2);
+}
+.modulo-painel-atendimento .timeline-content {
+  font-size: 12px;
+}
+.modulo-painel-atendimento .timeline-time {
+  color: #999;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 2px;
+}
+.modulo-painel-atendimento .timeline-text {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* Ações rápidas */
+.modulo-painel-atendimento .quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.modulo-painel-atendimento .quick-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: white;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 11px;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .quick-action-btn:hover {
+  background: #f0f7ff;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.modulo-painel-atendimento .quick-action-btn i {
+  font-size: 20px;
+}
+/* Estatísticas */
+.modulo-painel-atendimento .stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.modulo-painel-atendimento .stat-box {
+  background: var(--color-secondary);
+  padding: 12px;
+  border-radius: var(--radius);
+  text-align: center;
+}
+/* Formulários */
+.modulo-painel-atendimento .form-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--color-text);
+}
+.modulo-painel-atendimento .form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.modulo-painel-atendimento .campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.modulo-painel-atendimento .campo label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.modulo-painel-atendimento .campo select{
+    width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+}
+
+.modulo-painel-atendimento .campo textarea {
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-family: inherit;
+  background: white;
+  color: var(--color-text);
+}
+.modulo-painel-atendimento .campo select:focus,
+.modulo-painel-atendimento .campo textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+
+/* ============================================================
+   
+

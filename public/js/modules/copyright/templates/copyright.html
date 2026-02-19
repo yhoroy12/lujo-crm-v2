@@ -1,0 +1,341 @@
+<section class="modulo-painel-copyright">
+  <div class="painel-copyright">
+    
+    <!-- NAVEGAÇÃO DAS ABAS PRINCIPAIS -->
+    <div class="aba-nav">
+      <button class="aba-btn ativa" data-aba="aba-dashboard">Dashboard</button>
+      <button class="aba-btn" data-aba="aba-demandas">Central de Demandas</button>
+      <button class="aba-btn" data-aba="aba-artistas">Artistas</button>
+      <button class="aba-btn" data-aba="aba-comunicacao">Comunicação</button>
+      <button class="aba-btn" data-aba="aba-relatorios">Relatórios</button>
+    </div>
+
+    <!-- ABA 1 – DASHBOARD -->
+    <div class="aba-conteudo aba-dashboard ativa">
+      <div class="metricas-grid">
+        <div class="metrica-card">
+          <div class="metrica-titulo">Tickets Abertos</div>
+          <div class="metrica-valor">18</div>
+          <div class="metrica-trend negative">+3 vs ontem</div>
+        </div>
+        
+        <div class="metrica-card">
+          <div class="metrica-titulo">Claims Pendentes</div>
+          <div class="metrica-valor">7</div>
+          <div class="metrica-trend positive">-2 vs ontem</div>
+        </div>
+        
+        <div class="metrica-card">
+          <div class="metrica-titulo">E-mails Hoje</div>
+          <div class="metrica-valor">24</div>
+          <div class="metrica-trend positive">+4 vs ontem</div>
+        </div>
+        
+        <div class="metrica-card">
+          <div class="metrica-titulo">SLA Cumprido</div>
+          <div class="metrica-valor">94%</div>
+          <div class="metrica-trend positive">✅ Meta</div>
+        </div>
+      </div>
+
+      <div class="copyright-grid">
+        <!-- TICKETS URGENTES -->
+        <div class="card">
+          <h3>🚨 Tickets Urgentes</h3>
+          <div class="tickets-lista">
+            <div class="ticket-item status-urgente">
+              <div class="ticket-info">
+                <div class="ticket-cliente">Anitta - YouTube Claims</div>
+                <div class="ticket-desc">3 claims recebidos, resposta em 24h</div>
+                <div class="ticket-meta">
+                  <span>Plataforma: YouTube</span>
+                  <span>Prazo: 18h restantes</span>
+                </div>
+              </div>
+              <span class="status-badge status-urgente">Urgente</span>
+            </div>
+            
+            <div class="ticket-item status-pendente">
+              <div class="ticket-info">
+                <div class="ticket-cliente">Projota - Documentação</div>
+                <div class="ticket-desc">Documentação pendente para liberação financeira</div>
+                <div class="ticket-meta">
+                  <span>Área: Financeiro</span>
+                  <span>Prazo: 2 dias</span>
+                </div>
+              </div>
+              <span class="status-badge status-pendente">Pendente</span>
+            </div>
+            
+            <div class="ticket-item status-andamento">
+              <div class="ticket-info">
+                <div class="ticket-cliente">Ludmilla - Spotify Verificação</div>
+                <div class="ticket-desc">Conta pendente de verificação</div>
+                <div class="ticket-meta">
+                  <span>Plataforma: Spotify</span>
+                  <span>Aberto há: 3 dias</span>
+                </div>
+              </div>
+              <span class="status-badge status-andamento">Em Andamento</span>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" style="margin-top: 15px; width: 100%;">Ver Todos os Tickets</button>
+        </div>
+
+        <!-- ATIVIDADES RECENTES -->
+        <div class="card">
+          <h3>📋 Atividades Recentes</h3>
+          <div class="tickets-lista">
+            <div class="ticket-item">
+              <div class="ticket-info">
+                <div class="ticket-cliente">✅ Ticket #452 resolvido</div>
+                <div class="ticket-desc">Claim YouTube - Artista "MC Kevin"</div>
+                <div class="ticket-meta">Há 2 horas</div>
+              </div>
+            </div>
+            
+            <div class="ticket-item">
+              <div class="ticket-info">
+                <div class="ticket-cliente">📧 E-mail enviado</div>
+                <div class="ticket-desc">Para Anitta - Solicitação de documentos</div>
+                <div class="ticket-meta">Há 4 horas</div>
+              </div>
+            </div>
+            
+            <div class="ticket-item">
+              <div class="ticket-info">
+                <div class="ticket-cliente">🔄 Status alterado</div>
+                <div class="ticket-desc">Ticket #378 para "Em Análise"</div>
+                <div class="ticket-meta">Hoje, 09:30</div>
+              </div>
+            </div>
+            
+            <div class="ticket-item">
+              <div class="ticket-info">
+                <div class="ticket-cliente">📄 Contrato revisado</div>
+                <div class="ticket-desc">Contrato #7890 - Artista "Jão"</div>
+                <div class="ticket-meta">Hoje, 08:15</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 2 – CENTRAL DE DEMANDAS -->
+    <div class="aba-conteudo aba-demandas">
+      <div class="filtros-container">
+        <select>
+          <option>Todos os Status</option>
+          <option>Abertos</option>
+          <option>Em Andamento</option>
+          <option>Resolvidos</option>
+          <option>Urgentes</option>
+        </select>
+        
+        <select>
+          <option>Todas as Áreas</option>
+          <option>Financeiro</option>
+          <option>Jurídico</option>
+          <option>Marketing</option>
+          <option>Técnico</option>
+        </select>
+        
+        <select>
+          <option>Todas as Plataformas</option>
+          <option>YouTube</option>
+          <option>Spotify</option>
+          <option>Deezer</option>
+          <option>Apple Music</option>
+        </select>
+        
+        <button class="btn btn-primary">
+          <i class="fi fi-rr-filter"></i> Filtrar
+        </button>
+        
+        <button class="btn btn-success" id="btnNovaDemanda">
+          <i class="fi fi-rr-plus"></i> Nova Demanda
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Todas as Demandas</h3>
+        <div class="tickets-lista" id="listaDemandas">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 3 – ARTISTAS -->
+    <div class="aba-conteudo aba-artistas">
+      <div class="filtros-container">
+        <input type="text" placeholder="Buscar artista..." style="flex: 1;">
+        <button class="btn btn-primary">
+          <i class="fi fi-rr-search"></i> Buscar
+        </button>
+        <button class="btn btn-success">
+          <i class="fi fi-rr-user-add"></i> Novo Artista
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>🎤 Artistas Ativos</h3>
+        <div class="artistas-lista" id="listaArtistas">
+          <div class="artista-item">
+            <div class="artista-avatar">A</div>
+            <div class="artista-info">
+              <div class="artista-nome">Anitta</div>
+              <div class="artista-detalhes">
+                <span>Contrato: Ativo</span> • 
+                <span>Plataformas: 5</span> • 
+                <span>Último contato: Hoje</span>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-secondary">Ver Detalhes</button>
+          </div>
+          
+          <div class="artista-item">
+            <div class="artista-avatar">P</div>
+            <div class="artista-info">
+              <div class="artista-nome">Projota</div>
+              <div class="artista-detalhes">
+                <span>Contrato: Ativo</span> • 
+                <span>Documentação: Pendente</span> • 
+                <span>Último contato: 2 dias</span>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-secondary">Ver Detalhes</button>
+          </div>
+          
+          <div class="artista-item">
+            <div class="artista-avatar">L</div>
+            <div class="artista-info">
+              <div class="artista-nome">Ludmilla</div>
+              <div class="artista-detalhes">
+                <span>Contrato: Ativo</span> • 
+                <span>Spotify: Verificação pendente</span> • 
+                <span>Último contato: 3 dias</span>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-secondary">Ver Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 4 – COMUNICAÇÃO -->
+    <div class="aba-conteudo aba-comunicacao">
+      <div class="copyright-grid">
+        <div class="card comunicacao-area">
+          <div class="comunicacao-header">
+            <h3>📧 Comunicação por Artista</h3>
+            <select class="select-atendente" style="margin-top: 10px;">
+              <option>Selecionar Artista</option>
+              <option>Anitta</option>
+              <option>Projota</option>
+              <option>Ludmilla</option>
+              <option>MC Kevin</option>
+            </select>
+          </div>
+          
+          <div class="comunicacao-conteudo" id="historicoComunicacao">
+            <!-- Histórico de comunicação será carregado aqui -->
+          </div>
+          
+          <div class="form-group">
+            <textarea placeholder="Digite sua mensagem..." rows="3"></textarea>
+            <div class="form-actions" style="margin-top: 10px;">
+              <button class="btn btn-primary">Enviar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📋 Templates Rápidos</h3>
+          <div class="templates-grid">
+            <button class="template-btn">Solicitação de Documentação</button>
+            <button class="template-btn">Notificação de Claim</button>
+            <button class="template-btn">Aviso de Prazo</button>
+            <button class="template-btn">Confirmação de Recebimento</button>
+            <button class="template-btn">Resposta Padrão FAQ</button>
+            <button class="template-btn">Solicitação de Assinatura</button>
+          </div>
+          
+          <div style="margin-top: 20px;">
+            <h4>📊 Métricas de Comunicação</h4>
+            <div class="tickets-lista">
+              <div class="ticket-item">
+                <div class="ticket-info">
+                  <div class="ticket-cliente">E-mails enviados hoje</div>
+                  <div class="ticket-desc">12 e-mails • 3 pendentes de resposta</div>
+                </div>
+                <span class="status-badge status-andamento">Em dia</span>
+              </div>
+              
+              <div class="ticket-item">
+                <div class="ticket-info">
+                  <div class="ticket-cliente">Tempo médio de resposta</div>
+                  <div class="ticket-desc">3.2 horas • Meta: 4 horas</div>
+                </div>
+                <span class="status-badge status-resolvido">✅</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 5 – RELATÓRIOS -->
+    <div class="aba-conteudo aba-relatorios">
+      <div class="metricas-grid">
+        <div class="metrica-card">
+          <div class="metrica-titulo">Total de Tickets (Mês)</div>
+          <div class="metrica-valor">142</div>
+          <div class="metrica-trend positive">+18% vs mês anterior</div>
+        </div>
+        
+        <div class="metrica-card">
+          <div class="metrica-titulo">Resolução Média</div>
+          <div class="metrica-valor">2.8 dias</div>
+          <div class="metrica-trend positive">-0.5 dias vs anterior</div>
+        </div>
+        
+        <div class="metrica-card">
+          <div class="metrica-titulo">Claims por Plataforma</div>
+          <div class="metrica-valor">47</div>
+          <div class="metrica-trend negative">YouTube: 65%</div>
+        </div>
+        
+        <div class="metrica-card">
+          <div class="metrica-titulo">Satisfação Cliente</div>
+          <div class="metrica-valor">4.7</div>
+          <div class="metrica-trend positive">de 5.0 ⭐</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📈 Relatórios Disponíveis</h3>
+        <div class="templates-grid">
+          <button class="template-btn">
+            <i class="fi fi-rr-file"></i> Relatório Mensal
+          </button>
+          <button class="template-btn">
+            <i class="fi fi-rr-file"></i> Análise de Claims
+          </button>
+          <button class="template-btn">
+            <i class="fi fi-rr-file"></i> Performance da Equipe
+          </button>
+          <button class="template-btn">
+            <i class="fi fi-rr-file"></i> Plataformas por Artista
+          </button>
+          <button class="template-btn">
+            <i class="fi fi-rr-file"></i> Tickets por Status
+          </button>
+          <button class="template-btn">
+            <i class="fi fi-rr-file"></i> Exportar Dados Completos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

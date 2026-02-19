@@ -1,0 +1,34 @@
+/* ==================================================================================
+   HISTORICO-GMAIL.CSS - Sub-aba: Histórico Gmail
+   Autor: Sistema Lujo Network
+   
+   Exibe histórico de atendimentos via E-mail
+================================================================================== */
+
+.modulo-painel-atendimento .historico-gmail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Usa os mesmos estilos base de historico-whatsapp.css */
+/* com customizações específicas para e-mail */
+
+.modulo-painel-atendimento .historico-gmail .historico-status.devolvido {
+  background: var(--color-info-light);
+  color: var(--color-info);
+}
+
+.modulo-painel-atendimento .email-thread-icon {
+  color: var(--color-primary);
+  font-size: 14px;
+}
+
+.modulo-painel-atendimento .historico-assunto {
+  font-weight: var(--font-weight-medium);
+  color: var(--atendimento-text);
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

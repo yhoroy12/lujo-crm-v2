@@ -1,0 +1,18 @@
+<!-- MODAL DIRECIONAR EMAIL -->
+    <div id="modalDirecionarEmail" class="modal-email-justificativa" style="display:none;">
+      <div class="modal-email-content" style="width: 400px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3 style="margin:0;"><i class="fi fi-rr-shuffle"></i> Direcionar para...</h3>
+          <button onclick="EmailsTab.fecharModalDirecionar()" class="btn-modal-close-x">&times;</button>
+        </div>
+
+        <div class="lista-setores-direcionamento" style="display: flex; flex-direction: column; gap: 10px;">
+          <button class="item-setor" onclick="EmailsTab.confirmarDirecionamento('conteudo')">Conteúdo</button>
+          <button class="item-setor" onclick="EmailsTab.confirmarDirecionamento('tecnico')">Técnico</button>
+          <button class="item-setor" onclick="EmailsTab.confirmarDirecionamento('copyright')">Copyright /
+            Jurídico</button>
+          <button class="item-setor" onclick="EmailsTab.confirmarDirecionamento('financeiro')">Financeiro</button>
+          <button class="item-setor" onclick="EmailsTab.confirmarDirecionamento('marketing')">Marketing</button>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,308 @@
+<!-- ==================== ABA: ATENDIMENTO ==================== -->
+      <!-- Mensagem quando não há ticket -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-state-content">
+          <i class="fi fi-rr-hourglass"></i>
+          <h3>Aguardando Próximo Atendimento</h3>
+          <p>Você será notificado quando um novo ticket for atribuído.</p>
+          <div class="empty-state-stats">
+            <div class="stat-item">
+              <span class="stat-label">Tickets Hoje</span>
+              <span class="stat-value">12</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Tempo Médio</span>
+              <span class="stat-value">8min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Grid de Trabalho -->
+      <div class="atendimento-workspace hidden" id="workspaceGrid">
+
+        <!-- COLUNA 1: CONTEXTO -->
+        <aside class="workspace-context card">
+          <div class="context-header">
+            <div class="ticket-id">
+              <span class="label">TICKET</span>
+              <span class="value" id="ticketId">--</span>
+            </div>
+            <div class="ticket-state-badge">
+              <span class="state-indicator" id="stateIndicator">--</span>
+            </div>
+          </div>
+
+          <div class="context-section">
+            <div class="section-title">
+              <i class="fi fi-rr-user"></i>
+              <h4>Cliente</h4>
+            </div>
+            <div class="info-group">
+              <div class="info-item">
+                <label>Nome</label>
+                <input type="text" id="clienteNome" value="-" readonly>
+              </div>
+              <div class="info-item">
+                <label>Telefone</label>
+                <input type="text" id="clienteTelefone" value="-" readonly>
+              </div>
+              <div class="info-item">
+                <label>E-mail Principal</label>
+                <input type="text" id="clienteEmail" value="-" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="context-section">
+            <div class="section-title">
+              <i class="fi fi-rr-info"></i>
+              <h4>Informações</h4>
+            </div>
+            <div class="info-group">
+              <div class="info-item">
+                <label>Canal de Origem</label>
+                <div class="channel-badge" id="canalOrigem">
+                  <i class="fi fi-rr-comment-alt"></i>
+                  <span>WhatsApp</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <label>Atribuído em</label>
+                <span class="info-value" id="atribuidoEm">--:--</span>
+              </div>
+              <div class="info-item">
+                <label>Tempo Decorrido</label>
+                <span class="info-value timer" id="tempoDecorrido">00:00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checklist de Identidade -->
+          <div class="context-section identity-section" id="identitySection">
+            <div class="section-title">
+              <i class="fi fi-rr-shield-check"></i>
+              <h4>Validação de Identidade</h4>
+            </div>
+            <div class="identity-checklist">
+              <label class="checkbox-item">
+                <input type="checkbox" id="checkNome">
+                <span>Nome completo confirmado</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" id="checkTelefone">
+                <span>Telefone verificado</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" id="checkEmail">
+                <span>E-mail validado</span>
+              </label>
+            </div>
+            <button class="btn btn-primary btn-block" id="btnValidarIdentidade" disabled>
+              <i class="fi fi-rr-check"></i>
+              Confirmar Identidade
+            </button>
+          </div>
+
+          <!-- Indicador SLA -->
+          <div class="context-section sla-section">
+            <div class="sla-indicator" id="slaIndicator">
+              <div class="sla-bar">
+                <div class="sla-progress" id="slaProgress" style="width: 30%"></div>
+              </div>
+              <div class="sla-info">
+                <span class="sla-label">SLA</span>
+                <span class="sla-time" id="slaTime">12min restantes</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- COLUNA 2: TRABALHO ATIVO -->
+        <main class="workspace-main card">
+
+          <!-- BARRA DE AÇÕES SUPERIOR (CRÍTICO) -->
+          <div class="action-bar" id="actionBar">
+
+            <div class="action-bar-left">
+              <h4 class="form-title" style="margin: 0;">Classificação do Atendimento</h4>
+            </div>
+
+            <div class="action-bar-right">
+              <!-- Estado: NOVO -->
+
+              <!-- Estado: IDENTIDADE_VALIDADA -->
+              <button class="btn btn-success hidden" id="btnIniciarAtendimento">
+                <i class="fi fi-rr-headset"></i>
+                Iniciar Atendimento
+              </button>
+
+              <!-- Estado: EM_ATENDIMENTO -->
+              <button class="btn btn-success hidden" id="btnConcluir">
+                <i class="fi fi-rr-check-circle"></i>
+                Concluir
+              </button>
+              <button class="btn btn-secondary hidden" id="btnEncaminhar">
+                <i class="fi fi-rr-share"></i>
+                Encaminhar
+              </button>
+
+              <!-- Estado: ENCAMINHADO -->
+              <div class="info-block hidden" id="infoEncaminhado">
+                <i class="fi fi-rr-inbox-out"></i>
+                <p style="margin: 0;">Ticket encaminhado</p>
+              </div>
+
+              <!-- Estado: AGUARDANDO_CLIENTE -->
+              <div class="info-block hidden" id="infoAguardandoCliente">
+                <i class="fi fi-rr-time-forward"></i>
+                <p style="margin: 0;">Aguardando retorno</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Principal -->
+          <div class="chat-container">
+            <div class="chat-header">
+              <h3>
+                <i class="fi fi-rr-messages"></i>
+                Conversação
+              </h3>
+              <div class="chat-actions">
+                <button class="btn-icon" title="Anexar arquivo">
+                  <i class="fi fi-rr-clip"></i>
+                </button>
+                <button class="btn-icon" title="Modelos de mensagem">
+                  <i class="fi fi-rr-document"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="chatbox" id="chatbox" role="log" aria-live="polite" aria-atomic="false">
+              <div class="chat-day-divider">
+                <span>Hoje</span>
+              </div>
+              <div class="msg cliente">
+                <div class="msg-content">
+                  Olá! Estou com uma dúvida sobre minha fatura.
+                </div>
+                <div class="msg-time">14:32</div>
+              </div>
+              <div class="msg atendente">
+                <div class="msg-content">
+                  Claro, posso te ajudar! Qual o número da fatura?
+                </div>
+                <div class="msg-time">14:33</div>
+              </div>
+            </div>
+
+            <div class="chat-input-container" id="chatInputContainer">
+              <div class="chat-input-wrapper">
+                <textarea id="chatInput" placeholder="Digite sua mensagem..." rows="1" maxlength="1000"
+                  aria-label="Mensagem"></textarea>
+                <div class="chat-input-tools">
+                  <button class="btn-icon-sm" title="Emoji" type="button">
+                    <i class="fi fi-rr-smile"></i>
+                  </button>
+                  <div class="char-counter" id="charCounter">0/1000</div>
+                </div>
+              </div>
+              <button class="btn-send" id="btnEnviarMensagem" aria-label="Enviar mensagem">
+                <i class="fi fi-rr-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </main>
+
+        <!-- COLUNA 3: DETALHES DO ATENDIMENTO -->
+        <aside class="workspace-support card">
+
+          <!-- Formulário de Detalhes -->
+          <div class="support-section">
+            <h4 class="support-title">
+              <i class="fi fi-rr-edit"></i>
+              Detalhes do Atendimento
+            </h4>
+            <div class="form-group">
+              <label>Tipo de Conta</label>
+              <select id="tipoConta" onchange="WhatsAppTab.atualizarDadosLocal('tipo_conta', this.value)">
+                <option value="">Selecione o tipo...</option>
+                <option value="selo">Selo</option>
+                <option value="artista">Artista</option>
+                <option value="portador">Portador de Direitos</option>
+              </select>
+            </div>
+            <div class="form-row">
+
+              <div class="form-group">
+                <label>Tipo de Demanda</label>
+                <select id="tipoDemanda" onchange="WhatsAppTab.atualizarDadosLocal('tipo_demanda', this.value)">
+                  <option value="">Selecione a demanda...</option>
+
+                  <optgroup label="Conteúdo">
+                    <option value="Aprovar conteúdo">Aprovar conteúdo</option>
+                    <option value="Enviar conteúdo">Enviar conteúdo</option>
+                    <option value="Analisar conteúdo">Analisar conteúdo</option>
+                    <option value="Conteúdo">Conteúdo (Geral)</option>
+                  </optgroup>
+
+                  <optgroup label="Copyright">
+                    <option value="Criar Conta">Criar Conta</option>
+                    <option value="Migrar Conta">Migrar Conta</option>
+                    <option value="Reenviar Contrato">Reenviar Contrato</option>
+                    <option value="Aplicar Strike">Aplicar Strike</option>
+                  </optgroup>
+
+                  <optgroup label="Financeiro">
+                    <option value="Aprovar pagamento">Aprovar pagamento</option>
+                    <option value="Aprovar Advanced">Aprovar Advanced</option>
+                    <option value="Pagamento">Pagamento</option>
+                    <option value="Resetar Tipaldi">Resetar Tipaldi</option>
+                  </optgroup>
+
+                  <optgroup label="Técnico">
+                    <option value="Verificar Conteúdos Plataforma">Verificar Conteúdos Plataforma</option>
+                    <option value="Liberar Verificador em Dois Fatores">Liberar Verificador em Dois Fatores</option>
+                    <option value="Liberar Content ID">Liberar Content ID</option>
+                    <option value="Update de Conteúdo">Update de Conteúdo</option>
+                    <option value="Redelivery de Conteúdo">Redelivery de Conteúdo</option>
+                    <option value="Takedown">Takedown</option>
+                    <option value="MCN/Canais Youtube">MCN/Canais Youtube</option>
+                  </optgroup>
+
+                  <optgroup label="Marketing / Atendimento">
+                    <option value="Realizar Pitching">Realizar Pitching</option>
+                    <option value="Atualizar Royalties">Atualizar Royalties</option>
+                    <option value="Smart-Links">Smart-Links</option>
+                    <option value="Prospectação">Prospectação</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="campo">
+                <label>Setor Responsável</label>
+                <select id="setorResponsavel">
+                  <option value="">Selecione...</option>
+                  <option value="atendimento">Atendimento</option>
+                  <option value="conteudo">Conteúdo</option>
+                  <option value="marketing">Marketing</option>
+                  <option value="financeiro">Financeiro</option>
+                  <option value="copyright">Copyright</option>
+                  <option value="tecnico">Técnico</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label>Descrição da Solicitação</label>
+              <textarea id="descricaoSolicitacao" rows="4"
+                placeholder="Descreva brevemente o motivo do atendimento..."></textarea>
+            </div>
+
+            <div class="campo">
+              <label>Observações Internas</label>
+              <textarea id="observacoesInternas" rows="3"
+                placeholder="Notas visíveis apenas para a equipe interna..."></textarea>
+            </div>
+          </div>
+        </aside>
+        <!-- other tabs ... (unchanged) -->
+      </div>

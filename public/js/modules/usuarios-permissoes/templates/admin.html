@@ -1,0 +1,210 @@
+<!-- admin.html - MÓDULO SPA (SEM <html>, <head>, <body>) -->
+<section class="modulo-painel-admin">
+  <div class="painel-admin">
+
+    <!-- ==================== ABAS SUPERIORES ==================== -->
+    <div class="abas-container">
+      <button class="aba-btn ativa" data-aba="aba-usuarios">👥 Usuários</button>
+      <button class="aba-btn" data-aba="aba-perfis">🛡️ Perfis de Acesso</button>
+      <button class="aba-btn" data-aba="aba-permissoes">🔑 Permissões</button>
+      <button class="aba-btn" data-aba="aba-auditoria">📊 Auditoria</button>
+    </div>
+
+    <!-- ==================== ABA: USUÁRIOS ==================== -->
+    <div class="aba-conteudo aba-usuarios ativa">
+
+      <div class="admin-header-actions">
+        <h2>Gerenciar Usuários</h2>
+        <button class="btn btn-primary" id="btnNovoUsuario">
+          <i class="fi fi-rr-plus"></i> Novo Usuário
+        </button>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" id="searchUser" placeholder="🔍 Buscar usuário por nome, email ou perfil..." />
+      </div>
+
+      <div class="card">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Perfil</th>
+              <th>Status</th>
+              <th>Criado em</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <!-- Preenchido via JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- ==================== ABA: PERFIS DE ACESSO ==================== -->
+    <div class="aba-conteudo aba-perfis">
+
+      <div class="admin-header-actions">
+        <h2>Perfis de Acesso</h2>
+        <p class="subtitle">Configure as permissões para cada perfil de usuário</p>
+      </div>
+
+      <div class="roles-grid" id="rolesGrid">
+        <!-- Preenchido via JS -->
+      </div>
+
+    </div>
+
+    <!-- ==================== ABA: PERMISSÕES ==================== -->
+    <div class="aba-conteudo aba-permissoes">
+
+      <div class="admin-header-actions">
+        <h2>Matriz de Permissões</h2>
+        <p class="subtitle">Visualização completa de todas as permissões do sistema</p>
+      </div>
+
+      <div class="permissions-matrix" id="permissionsMatrix">
+        <!-- Preenchido via JS -->
+      </div>
+
+    </div>
+
+    <!-- ==================== ABA: AUDITORIA ==================== -->
+    <div class="aba-conteudo aba-auditoria">
+
+      <div class="admin-header-actions">
+        <h2>Logs de Auditoria</h2>
+        <p class="subtitle">Histórico de ações no sistema</p>
+      </div>
+
+      <div class="card">
+        <div class="audit-filters">
+          <select id="auditType">
+            <option>Todas as ações</option>
+            <option>Login/Logout</option>
+            <option>Criação de usuário</option>
+            <option>Alteração de permissões</option>
+          </select>
+          <input type="date" id="auditDate">
+          <button class="btn btn-secondary">Filtrar</button>
+        </div>
+
+        <div class="audit-log">
+          <p style="text-align: center; color: #999; padding: 40px;">
+            📋 Funcionalidade de auditoria em desenvolvimento.<br>
+            Em breve você poderá visualizar todos os logs de ações do sistema.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==================== MODAL: CRIAR/EDITAR USUÁRIO ==================== -->
+  <div class="modal-overlay" id="userModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Novo Usuário</h3>
+        <button class="close-btn" id="btnCloseUserModal">&times;</button>
+      </div>
+
+      <form id="userForm">
+        <div class="form-grid">
+
+          <div class="campo">
+            <label>Nome completo *</label>
+            <input type="text" id="userName" required>
+          </div>
+
+          <div class="campo">
+            <label>Email *</label>
+            <input type="email" id="userEmail" required>
+          </div>
+
+          <div class="campo">
+            <label>Usuário (login) *</label>
+            <input type="text" id="userUsername" required>
+          </div>
+
+          <div class="campo">
+            <label>Função *</label>
+            <input type="text" id="userPassword" required>
+          </div>
+
+          <div class="campo">
+            <label>Perfil de acesso *</label>
+            <select id="userRole" required>
+              <option value="">Selecione...</option>
+              <option value="ATENDENTE">Atendente</option>
+              <option value="COPYRIGHT">Copyright</option>
+              <option value="CONTEUDO">Conteúdo</option>
+              <option value="SUPERVISOR">Supervisor</option>
+              <option value="GERENTE">Gerente</option>
+              <option value="CEO">CEO</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label>Status</label>
+            <select id="userActive">
+              <option value="true">Ativo</option>
+              <option value="true">Pendente</option>
+              <option value="false">Inativo</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="custom-permissions">
+          <h4>Permissões Customizadas (Opcional)</h4>
+          <p class="hint">Adicione permissões além do perfil padrão</p>
+          <div id="customPermissionsCheckboxes" class="permissions-checkboxes">
+            <!-- Preenchido via JS -->
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btnCancelUser">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: EDITAR PERFIL ==================== -->
+  <div class="modal-overlay" id="roleModal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h3 id="roleModalTitle">Editar Perfil</h3>
+        <button class="close-btn" id="btnCloseRoleModal">&times;</button>
+      </div>
+
+      <div class="role-info">
+        <h4 id="roleInfoName"></h4>
+        <p id="roleInfoDesc"></p>
+      </div>
+
+      <form id="roleForm">
+        <div class="permissions-editor">
+          <h4>Permissões do Perfil</h4>
+          <p class="hint">Marque as permissões que este perfil deve ter</p>
+          <div id="rolePermissionsCheckboxes" class="permissions-checkboxes">
+            <!-- Preenchido via JS -->
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btnCancelRole">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts necessários -->
+  <script src="/functions/modulos/admin.js"></script>
+</section>

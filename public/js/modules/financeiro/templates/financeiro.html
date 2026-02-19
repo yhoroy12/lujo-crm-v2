@@ -1,0 +1,542 @@
+<!-- financeiro.html - Módulo Financeiro Completo -->
+<section class="modulo-painel-financeiro">
+  <div class="painel-financeiro">
+
+    <!-- ==================== HEADER DO MÓDULO ==================== -->
+    <div class="modulo-header">
+      <div>
+        <h1>💰 Gestão Financeira</h1>
+        <p>Controle completo de receitas, despesas e fluxo de caixa</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-secondary" id="btnExportar">
+          <i class="fi fi-rr-download"></i> Exportar
+        </button>
+        <button class="btn btn-primary" id="btnNovoLancamento" data-perm="financeiro.create">
+          <i class="fi fi-rr-plus"></i> Novo Lançamento
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== ABAS SUPERIORES ==================== -->
+    <div class="abas-container">
+      <button class="aba-btn ativa" data-aba="aba-visao-geral" data-perm="financeiro.view">
+        <i class="fi fi-rr-stats"></i> Visão Geral
+      </button>
+      <button class="aba-btn" data-aba="aba-lancamentos" data-perm="financeiro.view">
+        <i class="fi fi-rr-receipt"></i> Lançamentos
+      </button>
+      <button class="aba-btn" data-aba="aba-aprovacoes" data-perm="financeiro.approve">
+        <i class="fi fi-rr-check-circle"></i> Aprovações
+      </button>
+      <button class="aba-btn" data-aba="aba-pagamentos" data-perm="financeiro.execute_payment">
+        <i class="fi fi-rr-money-bill-wave"></i> Pagamentos
+      </button>
+      <button class="aba-btn" data-aba="aba-relatorios" data-perm="financeiro.reports">
+        <i class="fi fi-rr-chart-histogram"></i> Relatórios
+      </button>
+    </div>
+
+    <!-- ==================== ABA: VISÃO GERAL ==================== -->
+    <div class="aba-conteudo aba-visao-geral ativa">
+      
+      <!-- Cards Financeiros -->
+      <div class="dashboard-cards">
+        <div class="card card-financeiro">
+          <div class="card-header-mini">
+            <i class="fi fi-rr-wallet"></i>
+            <span>Saldo Atual</span>
+          </div>
+          <div class="card-value" id="saldoAtual">R$ 0,00</div>
+          <div class="card-subtitle">Atualizado em tempo real</div>
+        </div>
+
+        <div class="card card-financeiro">
+          <div class="card-header-mini">
+            <i class="fi fi-rr-arrow-up"></i>
+            <span>A Receber</span>
+          </div>
+          <div class="card-value text-success" id="aReceber">R$ 0,00</div>
+          <div class="card-subtitle" id="aReceberItens">0 lançamentos</div>
+        </div>
+
+        <div class="card card-financeiro">
+          <div class="card-header-mini">
+            <i class="fi fi-rr-arrow-down"></i>
+            <span>A Pagar</span>
+          </div>
+          <div class="card-value text-danger" id="aPagar">R$ 0,00</div>
+          <div class="card-subtitle" id="aPagarItens">0 lançamentos</div>
+        </div>
+
+        <div class="card card-financeiro">
+          <div class="card-header-mini">
+            <i class="fi fi-rr-shopping-cart"></i>
+            <span>Despesas do Mês</span>
+          </div>
+          <div class="card-value" id="despesasMes">R$ 0,00</div>
+          <div class="card-subtitle" id="comparacaoMes">vs. mês anterior</div>
+        </div>
+
+        <div class="card card-financeiro">
+          <div class="card-header-mini">
+            <i class="fi fi-rr-chart-line-up"></i>
+            <span>Resultado</span>
+          </div>
+          <div class="card-value" id="resultadoMes">R$ 0,00</div>
+          <div class="card-subtitle">Receitas - Despesas</div>
+        </div>
+      </div>
+
+      <!-- Resumo Financeiro -->
+      <div class="card">
+        <h3>Resumo Financeiro - Dezembro 2025</h3>
+        <div class="resumo-grid">
+          <div class="resumo-item">
+            <span class="resumo-label">Total de Receitas</span>
+            <span class="resumo-value text-success" id="totalReceitas">R$ 0,00</span>
+          </div>
+          <div class="resumo-item">
+            <span class="resumo-label">Total de Despesas</span>
+            <span class="resumo-value text-danger" id="totalDespesas">R$ 0,00</span>
+          </div>
+          <div class="resumo-item">
+            <span class="resumo-label">Adiantamentos</span>
+            <span class="resumo-value" id="totalAdiantamentos">R$ 0,00</span>
+          </div>
+          <div class="resumo-item">
+            <span class="resumo-label">Reembolsos</span>
+            <span class="resumo-value" id="totalReembolsos">R$ 0,00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Últimos Lançamentos -->
+      <div class="card">
+        <div class="card-header-flex">
+          <h3>Últimos Lançamentos</h3>
+          <button class="btn btn-sm btn-secondary" onclick="financeiroModule.irParaLancamentos()">
+            Ver Todos
+          </button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Categoria</th>
+                <th>Valor</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="ultimosLancamentos">
+              <tr>
+                <td colspan="6" style="text-align: center; padding: 40px; color: #999;">
+                  Nenhum lançamento encontrado
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ABA: LANÇAMENTOS ==================== -->
+    <div class="aba-conteudo aba-lancamentos">
+      
+      <!-- Filtros -->
+      <div class="card">
+        <div class="filtros-container">
+          <input type="text" id="searchLancamento" placeholder="🔍 Buscar lançamento..." class="search-input">
+          <select id="filtroTipo">
+            <option value="">Todos os tipos</option>
+            <option value="receita">Receita</option>
+            <option value="despesa">Despesa</option>
+            <option value="adiantamento">Adiantamento</option>
+            <option value="reembolso">Reembolso</option>
+          </select>
+          <select id="filtroStatus">
+            <option value="">Todos os status</option>
+            <option value="pendente">Pendente</option>
+            <option value="aprovado">Aprovado</option>
+            <option value="rejeitado">Rejeitado</option>
+            <option value="pago">Pago</option>
+          </select>
+          <input type="month" id="filtroPeriodo">
+          <button class="btn btn-secondary" id="btnLimparFiltros">Limpar</button>
+        </div>
+      </div>
+
+      <!-- Tabela de Lançamentos -->
+      <div class="card">
+        <div class="card-header-flex">
+          <h3>Todos os Lançamentos</h3>
+          <div class="badge badge-info" id="totalLancamentos">0 registros</div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Categoria</th>
+                <th>Valor</th>
+                <th>Solicitante</th>
+                <th>Status</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaLancamentos">
+              <tr>
+                <td colspan="9" style="text-align: center; padding: 40px; color: #999;">
+                  Carregando lançamentos...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ABA: APROVAÇÕES ==================== -->
+    <div class="aba-conteudo aba-aprovacoes">
+      
+      <!-- Estatísticas -->
+      <div class="dashboard-cards">
+        <div class="card">
+          <div class="stat-label">Aguardando Aprovação</div>
+          <div class="stat-value" id="statPendentes">0</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Aprovados Hoje</div>
+          <div class="stat-value text-success" id="statAprovadosHoje">0</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Rejeitados Hoje</div>
+          <div class="stat-value text-danger" id="statRejeitadosHoje">0</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Valor Total Pendente</div>
+          <div class="stat-value" id="statValorPendente">R$ 0,00</div>
+        </div>
+      </div>
+
+      <!-- Lançamentos Pendentes -->
+      <div class="card">
+        <h3>Lançamentos Aguardando Aprovação</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Solicitante</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Criado em</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaAprovacoes">
+              <tr>
+                <td colspan="8" style="text-align: center; padding: 40px; color: #999;">
+                  Nenhum lançamento pendente de aprovação
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Histórico de Aprovações -->
+      <div class="card">
+        <h3>Histórico de Aprovações (Últimos 30 dias)</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Data Aprovação</th>
+                <th>Lançamento</th>
+                <th>Aprovador</th>
+                <th>Decisão</th>
+                <th>Observações</th>
+              </tr>
+            </thead>
+            <tbody id="historicoAprovacoes">
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 40px; color: #999;">
+                  Nenhum histórico disponível
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ABA: PAGAMENTOS ==================== -->
+    <div class="aba-conteudo aba-pagamentos">
+      
+      <!-- Filtros de Pagamento -->
+      <div class="card">
+        <div class="filtros-container">
+          <select id="filtroPagamentoStatus">
+            <option value="aprovado">Aprovados (Aguardando Pagamento)</option>
+            <option value="pago">Pagos</option>
+            <option value="">Todos</option>
+          </select>
+          <input type="month" id="filtroPagamentoPeriodo">
+          <button class="btn btn-secondary" id="btnLimparFiltrosPagamento">Limpar</button>
+        </div>
+      </div>
+
+      <!-- Resumo de Pagamentos -->
+      <div class="dashboard-cards">
+        <div class="card">
+          <div class="stat-label">Aguardando Pagamento</div>
+          <div class="stat-value text-warning" id="statAguardandoPagamento">R$ 0,00</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Pagos Este Mês</div>
+          <div class="stat-value text-success" id="statPagosEsteMes">R$ 0,00</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Total de Transações</div>
+          <div class="stat-value" id="statTotalTransacoes">0</div>
+        </div>
+      </div>
+
+      <!-- Tabela de Pagamentos -->
+      <div class="card">
+        <h3>Controle de Pagamentos</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Data Vencimento</th>
+                <th>Descrição</th>
+                <th>Beneficiário</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Data Pagamento</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaPagamentos">
+              <tr>
+                <td colspan="8" style="text-align: center; padding: 40px; color: #999;">
+                  Carregando pagamentos...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ABA: RELATÓRIOS ==================== -->
+    <div class="aba-conteudo aba-relatorios">
+      
+      <!-- Controles de Relatório -->
+      <div class="card">
+        <div class="relatorios-controles">
+          <select id="tipoRelatorio">
+            <option value="dre">DRE - Demonstração do Resultado</option>
+            <option value="fluxo">Fluxo de Caixa</option>
+            <option value="despesas">Análise de Despesas</option>
+            <option value="categorias">Despesas por Categoria</option>
+          </select>
+          <input type="month" id="relatorioMes">
+          <button class="btn btn-primary" id="btnGerarRelatorio">
+            <i class="fi fi-rr-chart-pie"></i> Gerar Relatório
+          </button>
+          <button class="btn btn-secondary" id="btnExportarRelatorio">
+            <i class="fi fi-rr-file-pdf"></i> Exportar PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Área de Visualização do Relatório -->
+      <div class="card relatorio-container" id="relatorioContainer">
+        <div class="empty-state">
+          <i class="fi fi-rr-chart-histogram" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
+          <h3>Selecione um Relatório</h3>
+          <p>Escolha o tipo de relatório e o período desejado acima</p>
+        </div>
+      </div>
+
+      <!-- Mensagem de Acesso Restrito -->
+      <div class="card alerta-acesso" style="display: none;" data-perm-inverse="financeiro.reports">
+        <div class="alerta-content">
+          <i class="fi fi-rr-lock"></i>
+          <div>
+            <h3>Acesso Restrito</h3>
+            <p>Relatórios financeiros estão disponíveis apenas para Gerência e Administradores.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== MODAL: NOVO/EDITAR LANÇAMENTO ==================== -->
+  <div class="modal-overlay" id="modalLancamento">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalLancamentoTitulo">Novo Lançamento</h3>
+        <button class="close-btn" id="btnCloseModalLancamento">&times;</button>
+      </div>
+      <form id="formLancamento">
+        <div class="form-grid">
+          <div class="campo">
+            <label>Tipo *</label>
+            <select id="lancamentoTipo" required>
+              <option value="">Selecione...</option>
+              <option value="receita">Receita</option>
+              <option value="despesa">Despesa</option>
+              <option value="adiantamento">Adiantamento</option>
+              <option value="reembolso">Reembolso</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label>Data *</label>
+            <input type="date" id="lancamentoData" required>
+          </div>
+          <div class="campo" style="grid-column: 1 / -1;">
+            <label>Descrição *</label>
+            <input type="text" id="lancamentoDescricao" placeholder="Ex: Pagamento de fornecedor" required>
+          </div>
+          <div class="campo">
+            <label>Categoria *</label>
+            <select id="lancamentoCategoria" required>
+              <option value="">Selecione...</option>
+              <option value="vendas">Vendas</option>
+              <option value="servicos">Serviços</option>  
+              <option value="fornecedores">Fornecedores</option>
+              <option value="salarios">Salários</option>
+              <option value="marketing">Marketing</option>
+              <option value="infraestrutura">Infraestrutura</option>
+              <option value="outros">Outros</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label>Valor (R$) *</label>
+            <input type="number" id="lancamentoValor" step="0.01" min="0" placeholder="0,00" required>
+          </div>
+          <div class="campo">
+            <label>Beneficiário/Pagador</label>
+            <input type="text" id="lancamentoBeneficiario" placeholder="Nome da pessoa/empresa">
+          </div>
+          <div class="campo">
+            <label>Forma de Pagamento</label>
+            <select id="lancamentoFormaPagamento">
+              <option value="">Selecione...</option>
+              <option value="dinheiro">Dinheiro</option>
+              <option value="pix">PIX</option>
+              <option value="transferencia">Transferência</option>
+              <option value="cartao_credito">Cartão de Crédito</option>
+              <option value="cartao_debito">Cartão de Débito</option>
+              <option value="boleto">Boleto</option>
+            </select>
+          </div>
+          <div class="campo" style="grid-column: 1 / -1;">
+            <label>Observações</label>
+            <textarea id="lancamentoObservacoes" rows="3" placeholder="Informações adicionais..."></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="btnCancelarLancamento">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Lançamento</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: APROVAR/REJEITAR ==================== -->
+  <div class="modal-overlay" id="modalAprovacao">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Análise de Lançamento</h3>
+        <button class="close-btn" id="btnCloseModalAprovacao">&times;</button>
+      </div>
+      <div style="padding: 25px;">
+        <!-- Detalhes do Lançamento -->
+        <div class="detalhes-aprovacao" id="detalhesAprovacao">
+          <!-- Preenchido via JS -->
+        </div>
+
+        <!-- Ações -->
+        <div class="campo">
+          <label>Observações da Análise</label>
+          <textarea id="observacoesAprovacao" rows="3" placeholder="Comentários sobre a decisão..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-danger" id="btnRejeitar">
+            <i class="fi fi-rr-cross-circle"></i> Rejeitar
+          </button>
+          <button class="btn btn-warning" id="btnSolicitarAjuste">
+            <i class="fi fi-rr-edit"></i> Solicitar Ajuste
+          </button>
+          <button class="btn btn-success" id="btnAprovar">
+            <i class="fi fi-rr-check-circle"></i> Aprovar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: REGISTRAR PAGAMENTO ==================== -->
+  <div class="modal-overlay" id="modalPagamento">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Registrar Pagamento</h3>
+        <button class="close-btn" id="btnCloseModalPagamento">&times;</button>
+      </div>
+      <form id="formPagamento">
+        <div style="padding: 25px;">
+          <div class="info-lancamento-pagamento" id="infoLancamentoPagamento">
+            <!-- Preenchido via JS -->
+          </div>
+
+          <div class="campo">
+            <label>Data do Pagamento *</label>
+            <input type="date" id="pagamentoData" required>
+          </div>
+          <div class="campo">
+            <label>Forma de Pagamento *</label>
+            <select id="pagamentoForma" required>
+              <option value="">Selecione...</option>
+              <option value="dinheiro">Dinheiro</option>
+              <option value="pix">PIX</option>
+              <option value="transferencia">Transferência Bancária</option>
+              <option value="cartao">Cartão</option>
+              <option value="boleto">Boleto</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label>Comprovante/Documento</label>
+            <input type="text" id="pagamentoComprovante" placeholder="Número do comprovante ou documento">
+          </div>
+          <div class="campo">
+            <label>Observações</label>
+            <textarea id="pagamentoObservacoes" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="btnCancelarPagamento">Cancelar</button>
+          <button type="submit" class="btn btn-success">
+            <i class="fi fi-rr-check"></i> Confirmar Pagamento
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lujo Network - CRM</title>
+
+  <!-- ===== ÍCONES ===== -->
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+
+  <!-- ===== CSS GLOBAIS ===== -->
+  <link rel="stylesheet" href=".css/global.css">
+
+  <!-- ===== SCRIPTS - ORDEM CRÍTICA ===== -->
+
+  <!-- 1. FIREBASE CONFIG (primeiro, sem dependências) -->
+  <script type="module" src="./js/core/firebase-config.js"></script>
+
+  <!-- 2. MANAGERS GLOBAIS (dependem de utils, sem dependências de core) -->
+  <script src="./js/managers/utils.js"></script>
+  <script src="./js/managers/state-manager.js"></script>
+  <script src="./js/managers/module-lifecycle.js"></script>
+  <script src="./js/managers/tab-manager.js"></script>
+  <script src="./js/managers/modal-manager.js"></script>
+  <script src="./js/managers/list-manager.js"></script>
+  <script src="./js/core/PriorityMaster.js"></script>
+  <script src="./js/managers/demanda-state-machine.js"></script>
+  <script src="./js/managers/notification-manager.js"></script>
+
+  <!-- 3. CONFIGURAÇÕES (dependem de managers) -->
+  <script src="./js/config/permissions.js"></script>
+  <script src="./js/config/routes.js"></script>
+
+  <!-- 4. CORE - AUTENTICAÇÃO (depende de firebase-config) -->
+  <script type="module" src="./js/core/auth.js"></script>
+
+  <!-- 5. CORE - FILTRO DE PERMISSÕES (depende de auth e routes) -->
+  <script src="./js/core/permission-filter.js"></script>
+
+  <!-- 6. CORE - MAIN ORQUESTRADOR (carrega módulos, último) -->
+  <script type="module" src="./js/core/main.js"></script>
+</head>
+
+<body>
+  <!-- ===== LAYOUT PRINCIPAL ===== -->
+  <div class="app-layout">
+
+    <!-- ===== SIDEBAR / NAVEGAÇÃO ===== -->
+    <aside class="sidebar" id="sidebar" data-role="nav-container" role="navigation" aria-label="Navegação principal">
+      <a href="#" class="sidebar-link active" id="btnGoHome" title="Ir para o Início">
+        <i class="fi fi-rr-home"></i>
+        <span class="link-label">Home</span>
+      </a>
+      <div class="sidebar-divider"></div>
+      <div id="dynamic-menu">
+        <!-- Preenchido dinamicamente por permission-filter.js -->
+        <div class="sidebar-loading">
+          <p>⏳ Carregando menu...</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== TRIGGER SIDEBAR (mobile) ===== -->
+    <button class="sidebar-trigger" id="sidebar-trigger" aria-label="Abrir/fechar menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="header-left">
+        <h1 class="app-title">Lujo Network</h1>
+      </div>
+
+      <div class="header-center">
+        <nav class="breadcrumb" id="breadcrumb" role="navigation" aria-label="Breadcrumb">
+          <!-- Preenchido dinamicamente -->
+        </nav>
+      </div>
+
+      <div class="header-right">
+        <!-- USER INFO (preenchido por permission-filter.js) -->
+        <div class="user-info" data-role="user-info">
+          <!-- Badges de user e role -->
+        </div>
+
+        <!-- AÇÕES DO HEADER -->
+        <div class="header-actions">
+          <button class="btn btn-icon" id="btnSearch" title="Busca global (Ctrl+/)">
+            <i class="fi fi-rr-search"></i>
+          </button>
+          <button class="btn btn-icon" id="btnNotifications" title="Notificações">
+            <i class="fi fi-rr-bell"></i>
+            <span class="notification-badge">0</span>
+          </button>
+          <button class="btn btn-icon" id="btnNewspaper" title="Configurações">
+            <i class="fi fi-rr-bell"></i>
+          </button>
+          <button class="btn btn-danger" id="btnLogout" data-action="logout" title="Sair (Ctrl+L)">
+            <i class="fi fi-rr-sign-out"></i>
+            Sair
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main id="app-container" class="app-container" role="main">
+      <div id="dashboard-inicial" class="modulo-ativo">
+        <div class="dashboard-header">
+          <h1>Bem-vindo ao <span style="color: var(--color-primary);">Lujo Network CRM</span>! 👋</h1>
+          <p>Selecione um módulo abaixo para começar ou use a barra lateral para navegar</p>
+        </div>
+
+        <div class="dashboard-cards">
+          <!-- Card: Atendimento -->
+          <div class="dash-card" onclick="navegarParaModulo('atendimento')" data-module="atendimento">
+            <i class="fi fi-rr-phone-call"></i>
+            <h3>Atendimento</h3>
+            <p>Gerencie tickets de WhatsApp, e-mails e demandas externas</p>
+          </div>
+
+          <!-- Card: Conteúdo -->
+          <div class="dash-card" onclick="navegarParaModulo('conteudo')" data-module="conteudo">
+            <i class="fi fi-rr-music-alt"></i>
+            <h3>Conteúdo</h3>
+            <p>Gerencie músicas, artistas e processos de lançamento</p>
+          </div>
+
+          <!-- Card: Copyright -->
+          <div class="dash-card" onclick="navegarParaModulo('copyright')" data-module="copyright">
+            <i class="fi fi-rr-shield-check"></i>
+            <h3>Copyright</h3>
+            <p>Monitore direitos autorais e reivindicações</p>
+          </div>
+
+          <!-- Card: Financeiro -->
+          <div class="dash-card" onclick="navegarParaModulo('financeiro')" data-module="financeiro">
+            <i class="fi fi-rr-dollar"></i>
+            <h3>Financeiro</h3>
+            <p>Controle receitas, despesas e pagamentos</p>
+          </div>
+
+          <!-- Card: Marketing -->
+          <div class="dash-card" onclick="navegarParaModulo('marketing')" data-module="marketing">
+            <i class="fi fi-rr-star"></i>
+            <h3>Marketing</h3>
+            <p>Campanhas, análises e estratégias de divulgação</p>
+          </div>
+
+          <!-- Card: Técnico -->
+          <div class="dash-card" onclick="navegarParaModulo('tecnico')" data-module="tecnico">
+            <i class="fi fi-rr-users"></i>
+            <h3>Técnico</h3>
+            <p>Suporte técnico e manutenção de sistemas</p>
+          </div>
+
+          <!-- Card: Gerência -->
+          <div class="dash-card" onclick="navegarParaModulo('gerencia')" data-module="gerencia">
+            <i class="fi fi-rr-user"></i>
+            <h3>Gerência</h3>
+            <p>Visão executiva e tomada de decisões</p>
+          </div>
+
+          <!-- Card: Relatórios -->
+          <div class="dash-card" onclick="navegarParaModulo('relatorios')" data-module="relatorios">
+            <i class="fi fi-rr-chart-histogram"></i>
+            <h3>Relatórios</h3>
+            <p>Dashboards, métricas e análises detalhadas</p>
+          </div>
+
+          <!-- Card: Administração (só para admins) -->
+          <div class="dash-card" onclick="navegarParaModulo('admin')" data-module="admin"
+            data-permission="system.super_admin">
+            <i class="fi fi-rr-settings"></i>
+            <h3>Administração</h3>
+            <p>Configurações do sistema e gerenciamento de usuários</p>
+          </div>
+        </div>
+
+        <!-- Seção de notícias (opcional) -->
+        <section class="news-section"
+          style="margin-top: 40px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+          <h2 style="margin-bottom: 20px; color: var(--color-text);">
+            <i class="fi fi-rr-newspaper"></i> Notícias Recentes
+          </h2>
+
+          <div style="display: grid; gap: 20px;">
+            <article class="card">
+              <h3>Nova Política de Atendimento</h3>
+              <p>A partir do próximo mês, haverá atualizações nos horários e procedimentos para melhor atender nossos
+                clientes.</p>
+              <span style="font-size: 12px; color: var(--color-text-light);">Publicado em: 25/01/2025</span>
+            </article>
+
+            <article class="card">
+              <h3>Campanha de Marketing 2025</h3>
+              <p>O novo ciclo de campanhas foca no público jovem e em estratégias digitais modernas.</p>
+              <span style="font-size: 12px; color: var(--color-text-light);">Publicado em: 20/01/2025</span>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- CONTAINER PARA MÓDULOS (inicialmente oculto) -->
+      <div id="modulos-container" class="modulo-oculto">
+        <!-- Módulos serão carregados aqui dinamicamente -->
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Lujo Network - Sistema de Gerenciamento CRM</p>
+        <p>
+          <small>
+            Ícones por <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> |
+            <a href="#" id="aboutBtn">Sobre</a> |
+            <a href="#" id="helpBtn">Ajuda</a>
+          </small>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ===== GLOBAL SEARCH (MODAL) ===== -->
+  <div class="global-search" id="globalSearch" role="dialog" aria-hidden="true">
+    <div class="search-overlay"></div>
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input"
+          placeholder="🔍 Buscar módulo, usuário, ticket... (Pressione ESC para fechar)" autocomplete="off"
+          role="searchbox" aria-label="Busca global" />
+        <button class="btn-close-search" aria-label="Fechar busca">
+          <i class="fi fi-rr-cross"></i>
+        </button>
+      </div>
+      <ul class="search-results" id="searchResults" role="listbox">
+        <!-- Resultados preenchidos dinamicamente -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== TOAST NOTIFICATIONS ===== -->
+  <div id="toastContainer" class="toast-container" role="region" aria-live="polite" aria-label="Notificações"></div>
+
+  <!-- ===== LOADING GLOBAL ===== -->
+  <div id="globalLoading" class="global-loading hidden" role="status" aria-label="Carregando">
+    <div class="spinner"></div>
+    <p id="loadingText">Carregando...</p>
+  </div>
+
+  <!-- ===== MODAL DIALOGS ===== -->
+  <!-- SOBRE -->
+  <div class="modal" id="modalAbout" role="dialog" aria-labelledby="aboutTitle" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="aboutTitle">Sobre o Sistema</h2>
+        <button class="btn-close" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Lujo Network CRM</strong></p>
+        <p>Sistema integrado de gerenciamento de relacionamento com cliente.</p>
+        <p>
+          <strong>Versão:</strong> 2.0.0<br>
+          <strong>Última atualização:</strong> Janeiro 2025<br>
+          <strong>Desenvolvido com:</strong> Firebase, JavaScript ES6+
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" aria-label="Fechar">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AJUDA -->
+  <div class="modal" id="modalHelp" role="dialog" aria-labelledby="helpTitle" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="helpTitle">Central de Ajuda</h2>
+        <button class="btn-close" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h3>Atalhos de Teclado</h3>
+        <ul>
+          <li><kbd>Ctrl</kbd> + <kbd>/</kbd> - Abrir busca global</li>
+          <li><kbd>Ctrl</kbd> + <kbd>L</kbd> - Fazer logout</li>
+          <li><kbd>Alt</kbd> + <kbd>1-9</kbd> - Navegar para módulo</li>
+          <li><kbd>ESC</kbd> - Fechar busca/modal</li>
+        </ul>
+
+        <h3>Módulos Disponíveis</h3>
+        <p id="helpModules">
+          <!-- Preenchido dinamicamente -->
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" aria-label="Fechar">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ATRIBUTOS DATA PARA DEBUG ===== -->
+  <div style="display: none;" id="debugInfo">
+    <!-- Informações de debug (remover em produção) -->
+  </div>
+
+</body>
+
+</html>

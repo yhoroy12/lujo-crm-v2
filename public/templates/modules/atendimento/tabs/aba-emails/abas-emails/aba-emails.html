@@ -1,0 +1,88 @@
+<!-- ==================== ABA: Emails ==================== -->
+      <div class="email-panel">
+
+        <aside class="fila-atendimento-container">
+          <div class="fila-header">
+            <span>Fila de Espera</span>
+            <span id="emailFilaCount" class="badge">0</span>
+          </div>
+          <div id="emailFilaLista" class="fila-corpo">
+            <div class="fila-vazia-msg">Nenhum e-mail pendente</div>
+          </div>
+        </aside>
+
+        <main class="atendimento-palco">
+
+          <div id="palco-vazio" class="palco-vazio">
+            <div class="icon-container">
+              <i class="fas fa-envelope-open-text"
+                style="font-size: 3rem; color: var(--border); margin-bottom: 20px;"></i>
+            </div>
+            <h2>Pronto para novos atendimentos?</h2>
+            <p style="color: var(--muted); margin-bottom: 30px;">Clique no botão abaixo para puxar o próximo e-mail da
+              fila.
+            </p>
+
+            <button id="btnChamarProximo" class="btn-chamar-proximo">
+              <i class="fas fa-sign-in-alt"></i>
+              CHAMAR PRÓXIMO ATENDIMENTO
+            </button>
+          </div>
+
+          <div id="palco-ativo" class="card-atendimento-ativo" style="display: none;">
+            <div class="atendimento-ativo-header">
+              <div class="cliente-info">
+                <h3 id="ativo-cliente-nome">Nome do Cliente</h3>
+                <span id="ativo-cliente-email" style="color: var(--muted);">email@cliente.com</span>
+              </div>
+              <div class="atendimento-timer">
+                <span class="label">Tempo em atendimento:</span>
+                <span id="timer-atendimento" class="tempo-decorrido">00:00</span>
+              </div>
+            </div>
+
+            <div class="atendimento-ativo-corpo" style="padding: 20px; flex: 1; overflow: auto;">
+              <div class="assunto-box"
+                style="margin-bottom: 20px; padding: 10px; background: var(--bg); border-radius: 6px;">
+                <strong>Assunto:</strong> <span id="ativo-assunto">...</span>
+              </div>
+
+              <button id="btn-ver-anexos" class="btn-anexos-drive" style="display: none;">
+                <i class="fi fi-rr-paperclip"></i> Ver Anexos no Google Drive
+              </button>
+
+              <div id="ativo-mensagem-conteudo" class="mensagem-original email-corpo-formatado">
+              </div>
+
+              <div id="historico-conversa"
+                style="display: none; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; overflow: auto;">
+                <h4 style="font-size: 12px; color: #999; margin-bottom: 15px; text-transform: uppercase;">Conversas
+                  Anteriores</h4>
+                <div id="lista-mensagens-anteriores"></div>
+              </div>
+            </div>
+
+            <div class="atendimento-ativo-footer"
+              style="padding: 20px; border-top: 1px solid var(--border); background: #fcfcfc;">
+              <textarea id="resposta-email" placeholder="Escreva sua resposta aqui..." oninput="validarResposta()"
+                style="width: 100%; height: 80px; padding: 15px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 15px; resize: none; overflow: auto;"></textarea>
+
+              <div class="acoes-footer"
+                style="display: flex; justify-content: flex-end; gap: 12px; align-items: center;">
+                <button class="btn-devolver-fila" onclick="EmailsTab.abrirModalDevolucao()">
+                  <i class="fi fi-rr-undo"></i> Devolver para Fila
+                </button>
+                <button class="btn-direcionar" onclick="abrirModalDirecionamento()">
+                  <i class="fi fi-rr-redo"></i>
+                  <span>Direcionar Setor</span>
+                </button>
+                <button id="btnEnviarResposta" class="btn-responder-concluir" onclick="finalizarAtendimentoEmail()"
+                  disabled>
+                  <i class="fi fi-rr-paper-plane"></i> Responder e Concluir
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </main>
+      </div>

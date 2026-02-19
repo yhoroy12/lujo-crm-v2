@@ -1,0 +1,77 @@
+/* ==================================================================================
+   HISTORICO-WHATSAPP.CSS - Sub-aba: Histórico WhatsApp
+   Autor: Sistema Lujo Network
+   
+   Exibe histórico de atendimentos via WhatsApp
+================================================================================== */
+
+.modulo-painel-atendimento .historico-whatsapp {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.modulo-painel-atendimento .historico-tabela {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-base);
+}
+
+.modulo-painel-atendimento .tabela-historico {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg-white);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.modulo-painel-atendimento .tabela-historico thead {
+  background: var(--color-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.modulo-painel-atendimento .tabela-historico th {
+  padding: var(--spacing-base);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  color: var(--atendimento-text);
+  font-size: var(--font-size-small);
+  border-bottom: 2px solid var(--atendimento-border);
+}
+
+.modulo-painel-atendimento .tabela-historico td {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--atendimento-border);
+  font-size: var(--font-size-small);
+  color: var(--color-text);
+}
+
+.modulo-painel-atendimento .tabela-historico tbody tr:hover {
+  background: var(--color-secondary);
+  cursor: pointer;
+}
+
+.modulo-painel-atendimento .historico-status {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
+
+.modulo-painel-atendimento .historico-status.concluido {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.modulo-painel-atendimento .historico-status.derivado {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.modulo-painel-atendimento .historico-status.reaberto {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}

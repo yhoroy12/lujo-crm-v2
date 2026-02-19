@@ -1,0 +1,254 @@
+<!-- ==================== ABA: HISTÓRICO ==================== -->
+      <div class="sub-abas-historico">
+        <button class="sub-aba-btn ativa" data-canal="whatsapp">
+          <i class="fi fi-rr-whatsapp"></i> WhatsApp
+        </button>
+        <button class="sub-aba-btn" data-canal="gmail">
+          <i class="fi fi-rr-envelope"></i> E-mail (Gmail)
+        </button>
+      </div>
+      <div class="historico-container">
+
+        <!-- Header com filtros -->
+        <div class="historico-header">
+          <h2>
+            <i class="fi fi-rr-time-past"></i>
+            Histórico de Atendimentos
+          </h2>
+
+          <!-- Busca -->
+          <div class="historico-search">
+            <i class="fi fi-rr-search"></i>
+            <input type="text" id="searchHistorico" placeholder="Buscar por cliente, ticket ou tipo...">
+          </div>
+
+          <!-- Filtros -->
+          <div class="historico-filtros">
+            <div class="filtro-historico">
+              <label>Período</label>
+              <select id="filtroPeriodo">
+                <option value="hoje">Hoje</option>
+                <option value="ontem">Ontem</option>
+                <option value="semana">Esta Semana</option>
+                <option value="mes" selected>Este Mês</option>
+                <option value="total">Todos</option>
+                <option value="customizado">Customizado</option>
+              </select>
+            </div>
+
+            <div class="filtro-historico">
+              <label>Data Início</label>
+              <input type="date" id="filtroDataInicio">
+            </div>
+
+            <div class="filtro-historico">
+              <label>Data Fim</label>
+              <input type="date" id="filtroDataFim">
+            </div>
+
+            <div class="filtro-historico" id="containerFiltrosStatus">
+              <label>Status</label>
+              <select id="filtroStatus">
+                <option value="todos">Todos</option>
+                <option value="CONCLUIDO">Concluído</option>
+                <option value="ENCAMINHADO" class="so-whatsapp">Encaminhado</option>
+                <option value="RECUSADO" class="so-whatsapp">Recusado</option>
+              </select>
+            </div>
+
+            <div class="filtro-historico">
+              <label>Área Derivada</label>
+              <select id="filtroAreaDerivada">
+                <option value="todas">Todas as Áreas</option>
+                <option value="financeiro">Financeiro</option>
+                <option value="copyright">Copyright</option>
+                <option value="marketing">Marketing</option>
+                <option value="tecnico">Técnico</option>
+                <option value="conteudo">Conteúdo</option>
+                <option value="atendimento">Atendimento</option>
+              </select>
+            </div>
+
+            <div class="filtro-historico">
+              <label>Tipo de Demanda</label>
+              <select id="filtroTipoDemanda">
+                <option value="todos">Todos os Tipos</option>
+<optgroup label="Conteúdo">
+                    <option value="Aprovar conteúdo">Aprovar conteúdo</option>
+                    <option value="Enviar conteúdo">Enviar conteúdo</option>
+                    <option value="Analisar conteúdo">Analisar conteúdo</option>
+                    <option value="Conteúdo">Conteúdo (Geral)</option>
+                  </optgroup>
+
+                  <optgroup label="Copyright">
+                    <option value="Criar Conta">Criar Conta</option>
+                    <option value="Migrar Conta">Migrar Conta</option>
+                    <option value="Reenviar Contrato">Reenviar Contrato</option>
+                    <option value="Aplicar Strike">Aplicar Strike</option>
+                  </optgroup>
+
+                  <optgroup label="Financeiro">
+                    <option value="Aprovar pagamento">Aprovar pagamento</option>
+                    <option value="Aprovar Advanced">Aprovar Advanced</option>
+                    <option value="Pagamento">Pagamento</option>
+                    <option value="Resetar Tipaldi">Resetar Tipaldi</option>
+                  </optgroup>
+
+                  <optgroup label="Técnico">
+                    <option value="Verificar Conteúdos Plataforma">Verificar Conteúdos Plataforma</option>
+                    <option value="Liberar Verificador em Dois Fatores">Liberar Verificador em Dois Fatores</option>
+                    <option value="Liberar Content ID">Liberar Content ID</option>
+                    <option value="Update de Conteúdo">Update de Conteúdo</option>
+                    <option value="Redelivery de Conteúdo">Redelivery de Conteúdo</option>
+                    <option value="Takedown">Takedown</option>
+                    <option value="MCN/Canais Youtube">MCN/Canais Youtube</option>
+                  </optgroup>
+
+                  <optgroup label="Marketing / Atendimento">
+                    <option value="Realizar Pitching">Realizar Pitching</option>
+                    <option value="Atualizar Royalties">Atualizar Royalties</option>
+                    <option value="Smart-Links">Smart-Links</option>
+                    <option value="Prospectação">Prospectação</option>
+                  </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <!-- Estatísticas rápidas -->
+          <div class="historico-stats">
+            <div class="stat-historico">
+              <div>
+                <div class="stat-historico-label">Total Atendimentos</div>
+                <div class="stat-historico-value" id="statTotalAtendimentos">0</div>
+              </div>
+              <i class="fi fi-rr-headset" style="font-size: 32px; color: var(--color-primary); opacity: 0.2;"></i>
+            </div>
+
+            <div class="stat-historico">
+              <div>
+                <div class="stat-historico-label">Concluídos</div>
+                <div class="stat-historico-value" id="statConcluidos" style="color: var(--color-success);">0</div>
+              </div>
+              <i class="fi fi-rr-check-circle" style="font-size: 32px; color: var(--color-success); opacity: 0.2;"></i>
+            </div>
+
+            <div class="stat-historico">
+              <div>
+                <div class="stat-historico-label" id-target="derivado">Derivados</div>
+                <div class="stat-historico-value" id="statDerivados" style="color: var(--color-warning);">0</div>
+              </div>
+              <i class="fi fi-rr-share" style="font-size: 32px; color: var(--color-warning); opacity: 0.2;"></i>
+            </div>
+
+            <div class="stat-historico">
+              <div>
+                <div class="stat-historico-label">Tempo Médio</div>
+                <div class="stat-historico-value" id="statTempoMedio">0min</div>
+              </div>
+              <i class="fi fi-rr-clock" style="font-size: 32px; color: var(--color-primary); opacity: 0.2;"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de atendimentos -->
+        <div class="historico-lista" id="listaHistorico">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+    !-- ==================== MODAL: DETALHES DO ATENDIMENTO ==================== -->
+    <div class="modal-historico-overlay" id="modalHistoricoDetalhes">
+      <div class="modal-historico-content">
+        <div class="modal-historico-header">
+          <div>
+            <h3 id="modalTituloCliente">Cliente</h3>
+            <span class="modal-ticket-number" id="modalTicketNumber">Ticket #000000</span>
+          </div>
+          <button class="modal-close-btn" id="btnFecharModalHistorico">&times;</button>
+        </div>
+
+        <div class="modal-historico-body">
+
+          <!-- Informações principais -->
+          <div class="modal-section">
+            <div class="modal-section-title">
+              <i class="fi fi-rr-info"></i>
+              Informações Principais
+            </div>
+            <div class="info-grid-modal" id="modalInfoPrincipais">
+              <!-- Preenchido via JS -->
+            </div>
+          </div>
+
+          <!-- Validação de identidade -->
+          <div class="modal-section">
+            <div class="modal-section-title">
+              <i class="fi fi-rr-shield-check"></i>
+              Validação de Identidade
+            </div>
+            <div class="validacao-identidade" id="modalValidacaoIdentidade">
+              <i class="fi fi-rr-check-circle validacao-icon"></i>
+              <div class="validacao-text">
+                <strong>Status de Validação</strong>
+                <p>Carregando...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Descrição da solicitação -->
+          <div class="modal-section">
+            <div class="modal-section-title">
+              <i class="fi fi-rr-document"></i>
+              Descrição da Solicitação
+            </div>
+            <div class="descricao-box" id="modalDescricao">
+              <p>Carregando...</p>
+            </div>
+          </div>
+
+          <!-- Observações internas -->
+          <div class="modal-section" id="modalObservacoesSection">
+            <div class="modal-section-title">
+              <i class="fi fi-rr-edit"></i>
+              Observações Internas
+            </div>
+            <div class="descricao-box" id="modalObservacoes">
+              <p>Sem observações registradas</p>
+            </div>
+          </div>
+
+          <!-- Setor responsável -->
+          <div class="modal-section" id="modalSetorSection">
+            <div class="modal-section-title">
+              <i class="fi fi-rr-users-alt"></i>
+              Setor Responsável
+            </div>
+            <div id="modalSetorResponsavel">
+              <!-- Preenchido via JS -->
+            </div>
+          </div>
+
+          <!-- Linha do tempo -->
+          <div class="modal-section">
+            <div class="modal-section-title">
+              <i class="fi fi-rr-time-past"></i>
+              Linha do Tempo
+            </div>
+            <div class="timeline-modal" id="modalTimeline">
+              <!-- Preenchido via JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-historico-footer">
+          <button class="btn btn-secondary" id="btnFecharModalHistorico2">
+            <i class="fi fi-rr-cross"></i>
+            Fechar
+          </button>
+          <button class="btn btn-primary hidden" id="btnReabrirAtendimento" data-perm="atendimento.reopen">
+            <i class="fi fi-rr-refresh"></i>
+            Reabrir Atendimento
+          </button>
+        </div>
+      </div>
+    </div>

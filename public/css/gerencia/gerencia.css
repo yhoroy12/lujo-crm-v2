@@ -1,0 +1,322 @@
+/* ==================== GERENCIA.CSS - APENAS ESPECIFICIDADES ==================== */
+/* Imports dos módulos específicos */
+@import url('gerencia-indicadores.css');
+@import url('gerencia-operadores.css');
+@import url('gerencia-controle.css');
+
+/* Container específico */
+.modulo-painel-gerencia .container {
+  padding: 20px;
+}
+
+/* Grid específico de supervisão */
+.modulo-painel-gerencia .supervisor-grid {
+  display: grid;
+  grid-template-columns: 20% 1fr 20%;
+  gap: 20px;
+}
+
+/* Atendentes / Informações */
+.modulo-painel-gerencia .select-atendente {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  background: #fff;
+}
+
+.modulo-painel-gerencia .atendente-info {
+  margin-top: 10px;
+}
+
+.modulo-painel-gerencia .info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.modulo-painel-gerencia .info-item {
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.modulo-painel-gerencia .info-item p {
+  margin: 3px 0;
+}
+
+/* Fila de atendimento */
+.modulo-painel-gerencia .fila-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modulo-painel-gerencia .fila-status-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid #ccc;
+}
+
+.modulo-painel-gerencia .fila-status-circle.verde { 
+  background-color: #3fbf3f; 
+}
+
+.modulo-painel-gerencia .fila-status-circle.amarela { 
+  background-color: #e4d12e; 
+}
+
+.modulo-painel-gerencia .fila-status-circle.laranja { 
+  background-color: #ff8c00; 
+}
+
+.modulo-painel-gerencia .fila-status-circle.vermelha { 
+  background-color: #d62828; 
+}
+
+.modulo-painel-gerencia .fila-lista {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modulo-painel-gerencia .cliente-item {
+  background: #fafafa;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modulo-painel-gerencia .cliente-nome {
+  font-weight: 600;
+}
+
+.modulo-painel-gerencia .cliente-tempo {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Chat estilo WhatsApp */
+.modulo-painel-gerencia .chat-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.modulo-painel-gerencia .chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.modulo-painel-gerencia .chat-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.modulo-painel-gerencia .chat-box.whatsapp-style {
+  flex: 1;
+  padding: 14px;
+  border-radius: 10px;
+  overflow-y: auto;
+  background: #e5ddd5;
+  background-image: url("https://i.imgur.com/O8P4Y8N.png");
+  background-size: cover;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modulo-painel-gerencia .msg {
+  max-width: 70%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.4;
+  display: inline-block;
+  animation: fadeIn 0.2s ease;
+}
+
+.modulo-painel-gerencia .msg-left {
+  align-self: flex-start;
+  background: #ffffff;
+  border-radius: 0 8px 8px 8px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+
+.modulo-painel-gerencia .msg-right {
+  align-self: flex-end;
+  background: #d2f8c6;
+  border-radius: 8px 0 8px 8px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+
+.modulo-painel-gerencia .msg-hora {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: #4a4a4a;
+  margin-top: 3px;
+}
+
+/* Sub-abas do módulo gerência */
+.modulo-painel-gerencia .gerencia-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.modulo-painel-gerencia .sub-aba-btn {
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  border-bottom: 3px solid transparent;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+  color: var(--color-text, #333);
+}
+
+.modulo-painel-gerencia .sub-aba-btn:hover {
+  color: var(--color-primary, #007bff);
+}
+
+.modulo-painel-gerencia .sub-aba-btn.ativa {
+  color: var(--color-primary, #007bff);
+  border-bottom-color: var(--color-primary, #007bff);
+}
+
+.modulo-painel-gerencia .sub-aba-conteudo {
+  display: none;
+}
+
+.modulo-painel-gerencia .sub-aba-conteudo.ativa {
+  display: block;
+}
+
+/* Grid interno gerência */
+.modulo-painel-gerencia .gerencia-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+/* Lista de pedidos */
+.modulo-painel-gerencia .pedidos-lista ul {
+  list-style: none;
+}
+
+.modulo-painel-gerencia .pedido-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.modulo-painel-gerencia .pedido-item:last-child {
+  border-bottom: none;
+}
+
+/* Botões de ação específicos */
+.modulo-painel-gerencia .btn-detalhes, 
+.modulo-painel-gerencia .btn-aprovar, 
+.modulo-painel-gerencia .btn-reprovar {
+  padding: 4px 8px;
+  font-size: 12px;
+  margin-left: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modulo-painel-gerencia .btn-detalhes {
+  background-color: #007bff;
+  color: white;
+}
+
+.modulo-painel-gerencia .btn-aprovar {
+  background-color: #3fbf3f;
+  color: white;
+}
+
+.modulo-painel-gerencia .btn-reprovar {
+  background-color: #d62828;
+  color: white;
+}
+
+/* Painel de detalhes do pedido */
+.modulo-painel-gerencia .pedido-detalhes {
+  background: #fff;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  display: none;
+}
+
+.modulo-painel-gerencia .painel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.modulo-painel-gerencia .btn-fechar {
+  background-color: #d62828;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modulo-painel-gerencia .detalhes-info p {
+  margin: 4px 0;
+}
+
+.modulo-painel-gerencia .detalhes-descricao {
+  margin-top: 10px;
+}
+
+.modulo-painel-gerencia .detalhes-descricao h4 {
+  margin-bottom: 6px;
+}
+
+/* Responsividade */
+@media (max-width: 1100px) {
+  .modulo-painel-gerencia .supervisor-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .modulo-painel-gerencia .sub-aba-btn { 
+    flex-wrap: wrap; 
+  }
+}
+
+@media (max-width: 700px) {
+  .modulo-painel-gerencia .supervisor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modulo-painel-gerencia .gerencia-grid {
+    grid-template-columns: 1fr;
+  }
+}

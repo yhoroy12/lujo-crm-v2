@@ -1,0 +1,26 @@
+<!-- MODAL JUSTIFICATIVA DEVOLUÇÃO PARA FILA -->
+    <div id="modalJustificativaDevolucao" class="modal-email-justificativa" style="display:none;">
+      <div class="modal-email-content">
+        <div class="modal-header-flex"
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3 style="margin:0;"><i class="fi fi-rr-exclamation" style="color: #f1c40f;"></i> Justificativa</h3>
+          <button onclick="EmailsTab.fecharModalDevolucao()" class="btn-modal-close-x"
+            style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+        </div>
+        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Por que você está devolvendo este
+          atendimento
+          para
+          a fila?</p>
+
+        <textarea id="justificativaDevolucaoTexto"
+          placeholder="Ex: Assunto técnico demais, cliente precisa de suporte de nível 2..."
+          style="width: 100%; height: 100px; padding: 10px; border-radius: 8px; border: 1px solid #ddd;"></textarea>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px;">
+          <button class="btn-secundario" onclick="EmailsTab.fecharModalDevolucao()">Cancelar</button>
+          <button class="btn-devolver-fila"
+            style="height: 40px; padding: 0 20px; background: #f1c40f; color: #000; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;"
+            onclick="EmailsTab.confirmarDevolucao()">Confirmar Devolução</button>
+        </div>
+      </div>
+    </div

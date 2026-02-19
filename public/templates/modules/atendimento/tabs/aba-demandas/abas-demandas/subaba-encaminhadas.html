@@ -1,0 +1,227 @@
+<div class="demandas-conteudo demandas-encaminhadas">
+          <div class="demandas-grid-3col">
+
+            <!-- COLUNA 1: FILTROS -->
+            <aside class="demandas-filtros-painel card">
+              <div class="painel-header">
+                <h3>
+                  <i class="fi fi-rr-filter"></i>
+                  Filtros
+                </h3>
+              </div>
+
+              <div class="painel-body">
+                <form id="formFiltrosEncaminhadas">
+                  <div class="campo">
+                    <label for="filtroStatusEncaminhadas">
+                      <i class="fi fi-rr-checkbox"></i>
+                      Status
+                    </label>
+                    <select id="filtroStatusEncaminhadas" class="form-select">
+                      <option value="">Todos os status</option>
+                      <option value="PENDENTE">Pendente</option>
+                      <option value="EM_PROCESSO">Em Processo</option>
+                      <option value="AGUARDANDO_GERENCIA">Aguardando Gerência</option>
+                      <option value="RECUSADO">Recusado</option>
+                      <option value="CONCLUIDO">Concluído</option>
+                    </select>
+                  </div>
+
+                  <div class="campo">
+                    <label for="filtroSetorEncaminhadas">
+                      <i class="fi fi-rr-building"></i>
+                      Setor de Destino
+                    </label>
+                    <select id="filtroSetorEncaminhadas" class="form-select">
+                      <option value="">Todos os setores</option>
+                      <option value="atendimento">Atendimento</option>
+                      <option value="conteudo">Conteúdo</option>
+                      <option value="marketing">Marketing</option>
+                      <option value="financeiro">Financeiro</option>
+                      <option value="copyright">Copyright</option>
+                      <option value="tecnico">Técnico</option>
+                    </select>
+                  </div>
+
+                  <div class="campo">
+                    <label for="filtroPeriodoEncaminhadas">
+                      <i class="fi fi-rr-calendar"></i>
+                      Período
+                    </label>
+                    <select id="filtroPeriodoEncaminhadas" class="form-select">
+                      <option value="hoje">Hoje</option>
+                      <option value="semana">Última Semana</option>
+                      <option value="mes">Último Mês</option>
+                      <option value="todos">Todos</option>
+                    </select>
+                  </div>
+
+                  <div class="filtros-acoes">
+                    <button type="button" class="btn btn-primary btn-block" id="btnAplicarFiltrosEncaminhadas">
+                      <i class="fi fi-rr-filter"></i>
+                      Aplicar Filtros
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-block" id="btnLimparFiltrosEncaminhadas">
+                      <i class="fi fi-rr-refresh"></i>
+                      Limpar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </aside>
+
+            <!-- COLUNA 2: LISTA -->
+            <main class="demandas-resultados-painel card">
+              <div class="painel-header">
+                <h3>
+                  <i class="fi fi-rr-inbox-out"></i>
+                  Demandas que Encaminhei
+                </h3>
+                <span class="resultado-contador" id="contadorEncaminhadas">0 demandas</span>
+              </div>
+
+              <div class="painel-body">
+
+                <!-- ✅ ESTADO 1: VAZIO INICIAL (ativa por padrão) -->
+                <div class="estado-container estado-vazio ativa" id="estadoVazioEncaminhadas">
+                  <i class="fi fi-rr-filter"></i>
+                  <h4>Use os filtros acima</h4>
+                  <p>Clique em "Aplicar Filtros" para visualizar suas demandas encaminhadas</p>
+                </div>
+
+                <!-- ✅ ESTADO 2: CARREGANDO -->
+                <div class="estado-container estado-carregando" id="estadoCarregandoEncaminhadas">
+                  <div class="spinner"></div>
+                  <p>Carregando demandas...</p>
+                </div>
+
+                <!-- ✅ ESTADO 3: NÃO ENCONTRADO -->
+                <div class="estado-container estado-nao-encontrado" id="estadoNaoEncontradoEncaminhadas">
+                  <i class="fi fi-rr-inbox"></i>
+                  <h4>Nenhuma demanda encaminhada</h4>
+                  <p>Você ainda não encaminhou nenhuma demanda para outros setores</p>
+                </div>
+
+                <!-- ✅ LISTA DE DEMANDAS (oculta por padrão) -->
+                <div class="demandas-lista hidden" id="listaDemandasEncaminhadas">
+                  <!-- Cards gerados via JavaScript -->
+                </div>
+
+              </div>
+            </main>
+
+            <!-- COLUNA 3: DETALHES -->
+            <aside class="demandas-detalhes-painel card">
+
+              <div class="estado-vazio" id="detalhesVazioEncaminhadas">
+                <i class="fi fi-rr-document"></i>
+                <h4>Selecione uma demanda</h4>
+                <p>Clique em uma demanda da lista para acompanhar o andamento</p>
+              </div>
+
+              <div class="detalhes-conteudo hidden" id="detalhesConteudoEncaminhadas">
+                <div class="detalhes-header">
+                  <div class="detalhes-titulo-grupo">
+                    <h3 id="detalhesTituloEncaminhadas">Título da Demanda</h3>
+                    <div class="detalhes-badges">
+                      <span class="badge" id="detalhesStatusEncaminhadas">Status</span>
+                      <span class="badge badge-setor" id="detalhesSetorEncaminhadas">Setor</span>
+                    </div>
+                  </div>
+                  <button class="btn-close-detalhes" id="btnFecharDetalhesEncaminhadas">
+                    <i class="fi fi-rr-cross"></i>
+                  </button>
+                </div>
+
+                <div class="detalhes-body">
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-info"></i>
+                      Informações do Encaminhamento
+                    </h4>
+                    <div class="detalhes-info-grid">
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Ticket</span>
+                        <span class="info-value" id="detalhesTicketEncaminhadas">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Cliente</span>
+                        <span class="info-value" id="detalhesClienteEncaminhadas">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Encaminhado em</span>
+                        <span class="info-value" id="detalhesDataEncaminhadoEncaminhadas">-</span>
+                      </div>
+                      <div class="detalhes-info-item">
+                        <span class="info-label">Tempo Decorrido</span>
+                        <span class="info-value" id="detalhesTempoDecorridoEncaminhadas">-</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-document"></i>
+                      Solicitação Enviada
+                    </h4>
+                    <div class="detalhes-descricao" id="detalhesDescricaoEncaminhadas">
+                      <p>-</p>
+                    </div>
+                  </div>
+
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-comment-alt"></i>
+                      Justificativa do Encaminhamento
+                    </h4>
+                    <div class="detalhes-descricao" id="detalhesJustificativaEncaminhadas">
+                      <p>-</p>
+                    </div>
+                  </div>
+
+                  <div class="detalhes-secao">
+                    <h4 class="detalhes-secao-titulo">
+                      <i class="fi fi-rr-time-past"></i>
+                      Histórico de Acompanhamento
+                    </h4>
+                    <div class="detalhes-timeline" id="detalhesTimelineEncaminhadas">
+                      <!-- Timeline via JavaScript -->
+                    </div>
+                  </div>
+
+                  <!-- Seção de recusa: visível apenas quando status = RECUSADO -->
+                  <div class="secao-recusa hidden" id="secaoRecusaEncaminhadas">
+                    <div class="recusa-header">
+                      <i class="fi fi-rr-cross-circle"></i>
+                      <h4>Motivo da Recusa</h4>
+                    </div>
+                    <div class="recusa-parecer" id="parecerRecusaEncaminhadas">
+                      <p>-</p>
+                    </div>
+
+                    <div class="recusa-reenvio">
+                      <label for="inputComplementoReenvio">
+                        <i class="fi fi-rr-comment-alt"></i>
+                        Complemento / Informações Adicionadas
+                        <span class="required">*</span>
+                      </label>
+                      <textarea
+                        id="inputComplementoReenvio"
+                        class="form-textarea"
+                        rows="4"
+                        placeholder="Descreva o que foi ajustado ou as informações solicitadas pelo operador que recusou..."
+                      ></textarea>
+                      <button class="btn btn-primary btn-block" id="btnReenviarDemanda">
+                        <i class="fi fi-rr-paper-plane"></i>
+                        Reenviar para Análise
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </aside>
+
+          </div>
+        </div>

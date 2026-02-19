@@ -1,0 +1,31 @@
+/* ==================================================================================
+   COMPONENTES/UTILITARIOS.CSS - Módulo componentes - utilitarios
+   Autor: Sistema Lujo Network
+   Última atualização: 2025
+   
+   Este arquivo faz parte da estrutura modular CSS do módulo de atendimento.
+   Veja ESTRUTURA_MODULAR.md para documentação completa.
+==================================================================================
+[9] UTILITÁRIOS - CLASSES AUXILIARES
+============================================================ */
+.hidden {
+  display: none !important;
+}
+
+/* Classe helper para mostrar elementos */
+.visible {
+  display: flex !important;
+}
+
+.modulo-painel-atendimento .hidden {
+  display: none !important;
+}
+
+.modulo-painel-atendimento .btn-send,
+.modulo-painel-atendimento #chatInput {
+  display: inline-flex !important;
+}
+
+/* ============================================================
+   
+
